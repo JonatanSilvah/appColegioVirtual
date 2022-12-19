@@ -47,7 +47,7 @@ class _AlunosState extends State<Alunos> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Color(0xff344955),
+        backgroundColor: Color(0xff0b222c),
         title: TextField(
           decoration: InputDecoration(
               contentPadding: EdgeInsets.fromLTRB(12, 6, 12, 6),
@@ -60,7 +60,7 @@ class _AlunosState extends State<Alunos> {
               filled: true,
               hoverColor: Colors.white,
               fillColor: Colors.white,
-              hintText: "pesquisar",
+              hintText: "Pesquisar alunos",
               labelStyle: TextStyle(color: Colors.white),
               focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(32),
@@ -78,12 +78,18 @@ class _AlunosState extends State<Alunos> {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
             case ConnectionState.waiting:
-              return Center(
-                child: Column(
-                  children: [
-                    Text("Carregando Alunos"),
-                    CircularProgressIndicator()
-                  ],
+              return Container(
+                color: Color(0xff344955),
+                child: Center(
+                  child: Column(
+                    children: [
+                      Text(
+                        "Carregando Alunos",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      CircularProgressIndicator()
+                    ],
+                  ),
                 ),
               );
               break;
@@ -92,6 +98,7 @@ class _AlunosState extends State<Alunos> {
               QuerySnapshot? querySnapshot = snapshot.data;
               List<DocumentSnapshot> alunos = querySnapshot!.docs.toList();
               return Container(
+                color: Color(0xff344955),
                 child: Column(
                   children: [
                     Expanded(
@@ -112,6 +119,7 @@ class _AlunosState extends State<Alunos> {
 
                         if (_nomePesquisa.isEmpty) {
                           return Card(
+                            color: Color(0xff5f7481),
                             child: ListTile(
                               onTap: () {
                                 Navigator.push(
@@ -121,10 +129,18 @@ class _AlunosState extends State<Alunos> {
                               },
                               title: Text(
                                 data["nome"],
-                                style: TextStyle(color: Colors.black),
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18),
                               ),
-                              subtitle: Text(data["email"],
-                                  style: TextStyle(color: Colors.black)),
+                              subtitle: Text(
+                                data["email"],
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 16),
+                              ),
                               trailing: Container(
                                 child: Icon(
                                   Icons.arrow_right_rounded,
@@ -139,15 +155,30 @@ class _AlunosState extends State<Alunos> {
                             .toString()
                             .toLowerCase()
                             .contains(_nomePesquisa.toLowerCase())) {
-                          return ListTile(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) => InfoAluno(usuario)));
-                            },
-                            title: Text(data["nome"]),
-                            subtitle: Text(data["email"]),
+                          return Card(
+                            color: Color(0xff5f7481),
+                            child: ListTile(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => InfoAluno(usuario)));
+                              },
+                              title: Text(
+                                data["nome"],
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18),
+                              ),
+                              subtitle: Text(
+                                data["email"],
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 16),
+                              ),
+                            ),
                           );
                         }
 

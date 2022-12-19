@@ -16,10 +16,11 @@ class _InfoAlunoState extends State<InfoAluno> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xff344955),
+        backgroundColor: Color(0xff0b222c),
         title: Text("Informações do aluno"),
       ),
       body: Container(
+        color: Color(0xff344955),
         padding: EdgeInsets.only(top: 32, left: 16, right: 16),
         child: Column(
           children: [
@@ -27,127 +28,146 @@ class _InfoAlunoState extends State<InfoAluno> {
               padding: EdgeInsets.all(8),
               child: Column(
                 children: [
-                  Card(
-                      child: ListTile(
-                    title: Text("Nome: ${widget.usuario.nome.toString()}"),
-                  )),
-                  Gap(5),
+                  Row(
+                    children: [
+                      Text(
+                        "Nome:",
+                        style: TextStyle(
+                            fontWeight: FontWeight.normal,
+                            fontSize: 18,
+                            color: Colors.white),
+                      ),
+                      Gap(5),
+                      Text(
+                        widget.usuario.nome.toString(),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            color: Color(0xfff9aa33)),
+                      ),
+                    ],
+                  ),
+                  Gap(7),
                   Divider(
-                    color: Colors.black,
+                    color: Colors.white,
                   ),
-                  Gap(5),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        Text(
-                          "Email:",
-                          style: TextStyle(
-                              fontWeight: FontWeight.normal, fontSize: 18),
-                        ),
-                        Gap(5),
-                        Text(
-                          widget.usuario.email.toString(),
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 18),
-                        ),
-                      ],
-                    ),
+                  Gap(7),
+                  Row(
+                    children: [
+                      Text(
+                        "Email:",
+                        style: TextStyle(
+                            fontWeight: FontWeight.normal,
+                            fontSize: 18,
+                            color: Colors.white),
+                      ),
+                      Gap(5),
+                      Text(
+                        widget.usuario.email.toString(),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            color: Color(0xfff9aa33)),
+                      ),
+                    ],
                   ),
-                  Gap(5),
+                  Gap(7),
                   Divider(
-                    color: Colors.black,
+                    color: Colors.white,
                   ),
-                  Gap(5),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Data de Nascimento:",
-                          style: TextStyle(
-                              fontWeight: FontWeight.normal, fontSize: 18),
-                        ),
-                        Gap(5),
-                        Text(
-                          widget.usuario.dataNasc.toString(),
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 18),
-                        ),
-                      ],
-                    ),
+                  Gap(7),
+                  Row(
+                    children: [
+                      Text(
+                        "Data de nascimento:",
+                        style: TextStyle(
+                            fontWeight: FontWeight.normal,
+                            fontSize: 18,
+                            color: Colors.white),
+                      ),
+                      Gap(5),
+                      Text(
+                        widget.usuario.dataNasc.toString(),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            color: Color(0xfff9aa33)),
+                      ),
+                    ],
                   ),
-                  Gap(5),
+                  Gap(7),
                   Divider(
-                    color: Colors.black,
+                    color: Colors.white,
                   ),
-                  Gap(5),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        Text(
-                          "Celular:",
-                          style: TextStyle(
-                              fontWeight: FontWeight.normal, fontSize: 18),
-                        ),
-                        Gap(5),
-                        Text(
-                          widget.usuario.celularUsuario.toString(),
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 18),
-                        ),
-                      ],
-                    ),
+                  Gap(7),
+                  Row(
+                    children: [
+                      Text(
+                        "Celular:",
+                        style: TextStyle(
+                            fontWeight: FontWeight.normal,
+                            fontSize: 18,
+                            color: Colors.white),
+                      ),
+                      Gap(5),
+                      Text(
+                        widget.usuario.celularUsuario.toString(),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            color: Color(0xfff9aa33)),
+                      ),
+                    ],
                   ),
-                  Gap(5),
+                  Gap(7),
                   Divider(
-                    color: Colors.black,
+                    color: Colors.white,
                   ),
-                  Gap(5),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        Text(
-                          "CPF:",
-                          style: TextStyle(
-                              fontWeight: FontWeight.normal, fontSize: 18),
-                        ),
-                        Gap(5),
-                        Text(
-                          widget.usuario.cpfUsuario.toString(),
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 18),
-                        ),
-                      ],
-                    ),
+                  Gap(7),
+                  Row(
+                    children: [
+                      Text(
+                        "CPF:",
+                        style: TextStyle(
+                            fontWeight: FontWeight.normal,
+                            fontSize: 18,
+                            color: Colors.white),
+                      ),
+                      Gap(5),
+                      Text(
+                        widget.usuario.cpfUsuario.toString(),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            color: Color(0xfff9aa33)),
+                      ),
+                    ],
                   ),
-                  Gap(5),
+                  Gap(7),
                   Divider(
-                    color: Colors.black,
+                    color: Colors.white,
+                  ),
+                  Gap(7),
+                  Row(
+                    children: [
+                      Text(
+                        "Cidade:",
+                        style: TextStyle(
+                            fontWeight: FontWeight.normal,
+                            fontSize: 18,
+                            color: Colors.white),
+                      ),
+                      Gap(5),
+                      Text(
+                        widget.usuario.cidadeUsuario.toString(),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            color: Color(0xfff9aa33)),
+                      ),
+                    ],
                   ),
                   Gap(5),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        Text(
-                          "Cidade:",
-                          style: TextStyle(
-                              fontWeight: FontWeight.normal, fontSize: 18),
-                        ),
-                        Gap(5),
-                        Text(
-                          widget.usuario.cidadeUsuario.toString(),
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 18),
-                        ),
-                      ],
-                    ),
-                  ),
                 ],
               ),
             )

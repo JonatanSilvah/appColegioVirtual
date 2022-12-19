@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:projeto_cbq/Telas/InputCustomizado.dart';
 import 'package:projeto_cbq/model/ModelTurma.dart';
 
 class AdicionarTurma extends StatefulWidget {
@@ -26,7 +27,7 @@ class _AdicionarTurmaState extends State<AdicionarTurma> {
   String _mensagemErro = "";
   String _mensagemSucesso = "";
 
-  _validarCampos() {
+  _validarCampos(BuildContext context) async {
     String nomeTurma = _controllerNome.text;
     String anoInicio = _controllerInicio.text;
     String anoFinal = _controllerFinal.text;
@@ -65,20 +66,14 @@ class _AdicionarTurmaState extends State<AdicionarTurma> {
       turma.anoFinal = anoFinal;
       turma.cidade = _escolhaDropDown!;
 
-      _salvarTurma(turma);
+      await _salvarTurma(context, turma);
     }
   }
 
-  _salvarTurma(ModelTurma turma) async {
+  _salvarTurma(BuildContext context, ModelTurma turma) async {
     await db.collection("turmas").add(turma.toMap());
 
-    setState(() {
-      _controllerNome.text = "";
-      _controllerInicio.text = "";
-      _controllerFinal.text = "";
-
-      _mensagemSucesso = "Turma criada com sucesso!!!";
-    });
+    Navigator.pop(context);
   }
 
   _carregarItem() {
@@ -102,34 +97,30 @@ class _AdicionarTurmaState extends State<AdicionarTurma> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text("Adicionar turma"), backgroundColor: Color(0xff344955)),
+        title: Text("Adicionar turma"),
+        backgroundColor: Color(0xff0b222c),
+      ),
       body: Container(
+        height: double.infinity,
+        color: Color(0xff344955),
         padding: EdgeInsets.all(16),
         child: SingleChildScrollView(
             child: Column(
           children: [
-            TextField(
-                controller: _controllerNome,
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.fromLTRB(16, 8, 16, 8),
-                  hintText: "Nome da turma",
-                  labelText: "Nome turma",
-                  labelStyle: TextStyle(
-                      color: _errorBorderNome ? Colors.red : Colors.black),
-                  filled: true,
-                  fillColor: Colors.white,
-                  errorText: _errorBorderNome ? _mensagemErro : null,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      borderSide: BorderSide(color: Colors.black)),
-                )),
+            InputCustomizado(
+              hint: "Nome da turma",
+              controller: _controllerNome,
+              mensagem: _errorBorderNome ? _mensagemErro : null,
+              icon: null,
+              style: _errorBorderNome
+                  ? TextStyle(color: Colors.red)
+                  : TextStyle(color: Colors.white),
+            ),
             Gap(10),
             DropdownButtonFormField(
               decoration: InputDecoration(
+                fillColor: Color(0xfff9aa33),
+                filled: true,
                 contentPadding: EdgeInsets.fromLTRB(16, 8, 16, 8),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
@@ -139,7 +130,10 @@ class _AdicionarTurmaState extends State<AdicionarTurma> {
                     borderRadius: BorderRadius.circular(8),
                     borderSide: BorderSide(color: Colors.black)),
               ),
-              icon: Icon(Icons.location_city),
+              icon: Icon(
+                Icons.location_city,
+                color: _errorBorderCidade ? Colors.red : Colors.black,
+              ),
               value: _escolhaDropDown,
               hint: Text("Escolha a cidade",
                   style: TextStyle(
@@ -152,49 +146,31 @@ class _AdicionarTurmaState extends State<AdicionarTurma> {
               }),
             ),
             Gap(10),
-            TextField(
-                controller: _controllerInicio,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.fromLTRB(16, 8, 16, 8),
-                  hintText: "Ano de ínicio",
-                  labelText: "Ano de ínicio",
-                  labelStyle: TextStyle(
-                      color: _errorBorderAnoInicio ? Colors.red : Colors.black),
-                  filled: true,
-                  fillColor: Colors.white,
-                  errorText: _errorBorderAnoInicio ? _mensagemErro : null,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      borderSide: BorderSide(color: Colors.black)),
-                )),
+            InputCustomizado(
+              hint: "Ano de ínicio",
+              controller: _controllerInicio,
+              type: TextInputType.number,
+              mensagem: _errorBorderAnoInicio ? _mensagemErro : null,
+              icon: null,
+              style: _errorBorderAnoInicio
+                  ? TextStyle(color: Colors.red)
+                  : TextStyle(color: Colors.white),
+            ),
             Gap(10),
-            TextField(
-                controller: _controllerFinal,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.fromLTRB(16, 8, 16, 8),
-                  hintText: "Ano de termino",
-                  labelText: "Ano de termino",
-                  labelStyle: TextStyle(
-                      color: _errorBorderAnoFinal ? Colors.red : Colors.black),
-                  filled: true,
-                  fillColor: Colors.white,
-                  errorText: _errorBorderAnoFinal ? _mensagemErro : null,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      borderSide: BorderSide(color: Colors.black)),
-                )),
+            InputCustomizado(
+              hint: "Ano de ínicio",
+              controller: _controllerFinal,
+              type: TextInputType.number,
+              mensagem: _errorBorderAnoFinal ? _mensagemErro : null,
+              icon: null,
+              style: _errorBorderAnoFinal
+                  ? TextStyle(color: Colors.red)
+                  : TextStyle(color: Colors.white),
+            ),
             Gap(12),
             ElevatedButton(
               onPressed: () {
-                _validarCampos();
+                _validarCampos(context);
               },
               child: Text(
                 "Cadastrar",

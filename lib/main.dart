@@ -6,7 +6,7 @@ import 'Rotas.dart';
 import 'Telas/Login.dart';
 
 final ThemeData temaPadrao =
-    ThemeData(primaryColor: Color(0xffffc107), accentColor: Color(0xff70a83b));
+    ThemeData(primaryColor: Color(0xff344955), accentColor: Color(0xfff9aa33));
 
 Future<void> main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();

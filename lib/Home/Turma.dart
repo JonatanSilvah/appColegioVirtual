@@ -54,7 +54,7 @@ class _TurmaState extends State<Turma> {
         appBar: AppBar(
           title: Text("Turmas"),
           centerTitle: true,
-          backgroundColor: Color(0xff344955),
+          backgroundColor: Color(0xff0b222c),
         ),
         floatingActionButton: FloatingActionButton.extended(
           backgroundColor: Color(0xfff9aa33),
@@ -77,21 +77,25 @@ class _TurmaState extends State<Turma> {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
               case ConnectionState.waiting:
-                return Center(
+                return Container(
+                  color: Color(0xff344955),
+                  child: Center(
                     child: Column(
-                  children: [
-                    Text("Carregando turmas"),
-                    CircularProgressIndicator(),
-                  ],
-                ));
+                      children: [
+                        Text("Carregando turmas", style: TextStyle(color: Colors.white),),
+                        CircularProgressIndicator()
+                      ],
+                    ),
+                  ),
+                );
                 break;
               case ConnectionState.active:
               case ConnectionState.done:
                 QuerySnapshot? querySnapshot = snapshot.data;
                 List<DocumentSnapshot> turmas = querySnapshot!.docs.toList();
-                return Column(
-                  children: [
-                    Expanded(
+                return Container(
+                    color: Color(0xff344955),
+                    child: Expanded(
                         child: ListView.builder(
                             itemCount: turmas.length,
                             itemBuilder: (context, index) {
@@ -108,20 +112,31 @@ class _TurmaState extends State<Turma> {
                                       anoFinal);
                                 },
                                 child: Card(
+                                    color: Color(0xff5f7481),
                                     child: ListTile(
-                                  contentPadding:
-                                      EdgeInsets.fromLTRB(16, 8, 16, 8),
-                                  title: Text(nome),
-                                  subtitle: Text("$cidade, $anoIncial"),
-                                  trailing: Icon(
-                                    Icons.arrow_right_rounded,
-                                    color: Color(0xfff9aa33),
-                                  ),
-                                )),
+                                      contentPadding:
+                                          EdgeInsets.fromLTRB(16, 8, 16, 8),
+                                      title: Text(
+                                        nome,
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18),
+                                      ),
+                                      subtitle: Text(
+                                        "$cidade, $anoIncial",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.normal,
+                                            fontSize: 16),
+                                      ),
+                                      trailing: Icon(
+                                        Icons.arrow_right_rounded,
+                                        color: Color(0xfff9aa33),
+                                      ),
+                                    )),
                               );
-                            }))
-                  ],
-                );
+                            })));
             }
           },
         ));

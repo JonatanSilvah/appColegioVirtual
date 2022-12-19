@@ -150,104 +150,91 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
+        color: Color(0xff344955),
         child: SingleChildScrollView(
           child: Column(
             children: [
               Container(
-                height: 350,
-                width: MediaQuery.of(context).size.width * 0.9,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
+                  height: 350,
+                  width: 250,
+                  /*  decoration: BoxDecoration(
+                     image: DecorationImage(
                       image: AssetImage(
                         "images/logoCBQ.png",
                       ),
                       fit: BoxFit.contain),
-                ),
-              ),
+                    ),*/
+                  color: Color(0xfff9aa33),
+                  child: Center(
+                    child: Text(
+                      "LOGO",
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  )),
               Padding(
                 padding: EdgeInsets.only(left: 30, right: 30),
                 child: Column(
                   children: [
-                    AnimatedBuilder(
-                        animation: _animacaoSize!,
-                        builder: (context, widget) {
-                          return Container(
-                            width: _animacaoSize!.value,
-                            padding: EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(8),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.grey,
-                                      blurRadius: 15,
-                                      spreadRadius: 4)
-                                ]),
-                            child: Column(
-                              children: [
-                                Text(
-                                  _mensagemErroLogar!,
-                                  style: TextStyle(
-                                      color: Colors.red,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                InputCustomizado(
-                                  
-                                  controller: _controllerEmail,
-                                  hint: "E-mail",
-                                  type: TextInputType.emailAddress,
-                                  mensagem:
-                                      _errorBorderEmail ? _mensagemErro : null,
-                                  icon: Icon(
-                                    Icons.person,
-                                    color:
-                                        _errorBorderEmail ? Colors.red : null,
-                                  ),
-                                ),
-                                InputCustomizado(
-                                  controller: _controllerSenha,
-                                  hint: "senha",
-                                  type: TextInputType.text,
-                                  mensagem:
-                                      _errorBorderSenha ? _mensagemErro : null,
-                                  obscure: true,
-                                  icon: Icon(Icons.lock,
-                                      color: _errorBorderSenha
-                                          ? Colors.red
-                                          : null),
-                                )
-                              ],
-                            ),
-                          );
-                        }),
-                    Gap(20),
-                    AnimatedBuilder(
-                      animation: _animacaoSize!,
-                      builder: (context, child) {
-                        return InkWell(
-                          onTap: () {
-                            _validarCampos();
-                          },
-                          child: Container(
-                            height: 50,
-                            width: _animacaoSize!.value,
-                            child: Center(
-                                child: Text(
-                              "Entrar",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold),
-                            )),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                gradient: LinearGradient(colors: [
-                                  Color(0xffe3bb64),
-                                  Color(0xfff9aa33)
-                                ])),
+                    Column(
+                      children: [
+                        Text(
+                          _mensagemErroLogar!,
+                          style: TextStyle(
+                              color: Colors.red, fontWeight: FontWeight.bold),
+                        ),
+                        InputCustomizado(
+                          controller: _controllerEmail,
+                          hint: "E-mail",
+                          type: TextInputType.emailAddress,
+                          mensagem: _errorBorderEmail ? _mensagemErro : null,
+                          icon: Icon(
+                            Icons.email,
+                            color:
+                                _errorBorderEmail ? Colors.red : Colors.white,
                           ),
-                        );
+                          style: _errorBorderEmail
+                              ? TextStyle(color: Colors.red)
+                              : TextStyle(color: Colors.white),
+                        ),
+                        Gap(10),
+                        InputCustomizado(
+                          controller: _controllerSenha,
+                          hint: "senha",
+                          type: TextInputType.text,
+                          mensagem: _errorBorderSenha ? _mensagemErro : null,
+                          obscure: true,
+                          icon: Icon(Icons.lock,
+                              color: _errorBorderSenha
+                                  ? Colors.red
+                                  : Colors.white),
+                          style: _errorBorderSenha
+                              ? TextStyle(color: Colors.red)
+                              : TextStyle(color: Colors.white),
+                        )
+                      ],
+                    ),
+                    Gap(20),
+                    InkWell(
+                      onTap: () {
+                        _validarCampos();
                       },
+                      child: Container(
+                        height: 50,
+                        child: Center(
+                            child: Text(
+                          "Entrar",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        )),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            gradient: LinearGradient(colors: [
+                              Color(0xffe3bb64),
+                              Color(0xfff9aa33)
+                            ])),
+                      ),
                     ),
                     Gap(12),
                     InkWell(

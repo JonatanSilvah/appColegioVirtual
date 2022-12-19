@@ -13,7 +13,10 @@ class _InfoEventoState extends State<InfoEvento> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Informações do evento"),
-        backgroundColor: Color(0xff344955),
+        backgroundColor: Color(0xff0b222c),
+      ),
+      body: Container(
+        color: Color(0xff344955),
       ),
     );
   }

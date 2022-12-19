@@ -36,6 +36,8 @@ class _InfoTurmaState extends State<InfoTurma> {
   final _controller = StreamController<QuerySnapshot>.broadcast();
 
   String name = "";
+  bool _expandEvento = false;
+  bool _expandAlunos = false;
 
   _adicionarListenerTurma() async {
     final stream = db
@@ -113,7 +115,7 @@ class _InfoTurmaState extends State<InfoTurma> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Color(0xff344955),
+          backgroundColor: Color(0xff0b222c),
           title: TextField(
             decoration: InputDecoration(
                 contentPadding: EdgeInsets.fromLTRB(12, 6, 12, 6),
@@ -126,7 +128,7 @@ class _InfoTurmaState extends State<InfoTurma> {
                 filled: true,
                 hoverColor: Colors.white,
                 fillColor: Colors.white,
-                hintText: "pesquisar",
+                hintText: "Pesquisar alunos",
                 labelStyle: TextStyle(color: Colors.white),
                 focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(32),
@@ -158,6 +160,7 @@ class _InfoTurmaState extends State<InfoTurma> {
                 QuerySnapshot? querySnapshot = snapshot.data;
                 List<DocumentSnapshot> alunos = querySnapshot!.docs.toList();
                 return Container(
+                  color: Color(0xff344955),
                   child: Column(
                     children: [
                       Container(
@@ -171,14 +174,16 @@ class _InfoTurmaState extends State<InfoTurma> {
                                   "Turma:",
                                   style: TextStyle(
                                       fontWeight: FontWeight.normal,
-                                      fontSize: 18),
+                                      fontSize: 18,
+                                      color: Colors.white),
                                 ),
                                 Gap(5),
                                 Text(
                                   widget.nomeTurma.toString(),
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 18),
+                                      fontSize: 18,
+                                      color: Color(0xfff9aa33)),
                                 ),
                               ],
                             ),
@@ -189,14 +194,16 @@ class _InfoTurmaState extends State<InfoTurma> {
                                   "Ano íncial:",
                                   style: TextStyle(
                                       fontWeight: FontWeight.normal,
-                                      fontSize: 18),
+                                      fontSize: 18,
+                                      color: Colors.white),
                                 ),
                                 Gap(5),
                                 Text(
                                   widget.anoTurma.toString(),
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 18),
+                                      fontSize: 18,
+                                      color: Color(0xfff9aa33)),
                                 ),
                               ],
                             ),
@@ -207,14 +214,16 @@ class _InfoTurmaState extends State<InfoTurma> {
                                   "Ano final:",
                                   style: TextStyle(
                                       fontWeight: FontWeight.normal,
-                                      fontSize: 18),
+                                      fontSize: 18,
+                                      color: Colors.white),
                                 ),
                                 Gap(5),
                                 Text(
                                   widget.anoFinal.toString(),
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 18),
+                                      fontSize: 18,
+                                      color: Color(0xfff9aa33)),
                                 ),
                               ],
                             ),
@@ -225,14 +234,16 @@ class _InfoTurmaState extends State<InfoTurma> {
                                   "Cidade:",
                                   style: TextStyle(
                                       fontWeight: FontWeight.normal,
-                                      fontSize: 18),
+                                      fontSize: 18,
+                                      color: Colors.white),
                                 ),
                                 Gap(5),
                                 Text(
                                   widget.cidadeTurma.toString(),
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 18),
+                                      fontSize: 18,
+                                      color: Color(0xfff9aa33)),
                                 ),
                               ],
                             ),
@@ -243,124 +254,200 @@ class _InfoTurmaState extends State<InfoTurma> {
                         color: Colors.grey,
                       ),
                       Gap(10),
-                      Text("Eventos: ",
-                          style: TextStyle(
-                              fontWeight: FontWeight.normal, fontSize: 18)),
-                      Expanded(
-                          flex: 2,
-                          child: ListView.builder(
-                            itemCount: _eventosSalvos.length,
-                            itemBuilder: (context, index) {
-                              return Card(
-                                child: ListTile(
-                                  onTap: () {},
-                                  title: Text(
-                                    _eventosSalvos[index].nomeEvento,
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  subtitle:
-                                      Text(_eventosSalvos[index].dataInicial),
-                                  trailing: Container(
-                                    child: Text(
-                                      _eventosSalvos[index].status,
-                                      style:
-                                          TextStyle(color: Color(0xfff9aa33)),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _expandEvento = !_expandEvento;
+                          });
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Eventos",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 18,
+                                  color: Color(0xfff9aa33)),
+                            ),
+                            Gap(10),
+                            _expandEvento == false
+                                ? Icon(Icons.expand_more,
+                                    color: Color(0xfff9aa33))
+                                : Icon(Icons.expand_less,
+                                    color: Color(0xfff9aa33))
+                          ],
+                        ),
+                      ),
+                      AnimatedContainer(
+                        height: _expandEvento == false
+                            ? 0
+                            : MediaQuery.of(context).size.height * 0.25,
+                        duration: Duration(milliseconds: 500),
+                        child: Expanded(
+                            flex: 2,
+                            child: ListView.builder(
+                              itemCount: _eventosSalvos.length,
+                              itemBuilder: (context, index) {
+                                return Card(
+                                  color: Color(0xff5f7481),
+                                  child: ListTile(
+                                    onTap: () {},
+                                    title: Text(
+                                        _eventosSalvos[index].nomeEvento,
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18)),
+                                    subtitle: Text(
+                                        _eventosSalvos[index].dataInicial,
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18)),
+                                    trailing: Container(
+                                      child: Text(
+                                        _eventosSalvos[index].status,
+                                        style:
+                                            TextStyle(color: Color(0xfff9aa33)),
+                                      ),
                                     ),
                                   ),
-                                ),
-                              );
-                            },
-                          )),
+                                );
+                              },
+                            )),
+                      ),
                       Divider(),
                       Gap(10),
-                      Text("Alunos:",
-                          style: TextStyle(
-                              fontWeight: FontWeight.normal, fontSize: 18)),
-                      Expanded(
-                          flex: 3,
-                          child: ListView.builder(
-                              itemCount: querySnapshot.docs.length,
-                              itemBuilder: (context, index) {
-                                var data = snapshot.data!.docs[index].data()
-                                    as Map<String, dynamic>;
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _expandAlunos = !_expandAlunos;
+                          });
+                        },
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text("Alunos",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 18,
+                                      color: Color(0xfff9aa33))),
+                              _expandAlunos == false
+                                  ? Icon(Icons.expand_more,
+                                      color: Color(0xfff9aa33))
+                                  : Icon(Icons.expand_less,
+                                      color: Color(0xfff9aa33))
+                            ]),
+                      ),
+                      AnimatedContainer(
+                        height: _expandAlunos == false ? 0 : null,
+                        duration: Duration(milliseconds: 500),
+                        child: Expanded(
+                            flex: 3,
+                            child: ListView.builder(
+                                itemCount: querySnapshot.docs.length,
+                                itemBuilder: (context, index) {
+                                  var data = snapshot.data!.docs[index].data()
+                                      as Map<String, dynamic>;
 
-                                Usuario usuario = Usuario();
-                                usuario.nome = data["nome"];
-                                usuario.celularUsuario = data["celular"];
-                                usuario.cidadeUsuario = data["cidade"];
-                                usuario.cpfUsuario = data["cpf"];
-                                usuario.dataNasc = data["dataNasc"];
-                                usuario.email = data["email"];
-                                usuario.idUsuario = data["idUsuario"];
+                                  Usuario usuario = Usuario();
+                                  usuario.nome = data["nome"];
+                                  usuario.celularUsuario = data["celular"];
+                                  usuario.cidadeUsuario = data["cidade"];
+                                  usuario.cpfUsuario = data["cpf"];
+                                  usuario.dataNasc = data["dataNasc"];
+                                  usuario.email = data["email"];
+                                  usuario.idUsuario = data["idUsuario"];
 
-                                if (_nomePesquisa.isEmpty) {
-                                  return Card(
-                                      child: Dismissible(
-                                    key: UniqueKey(),
-                                    onDismissed: ((direction) {
-                                      _removerAluno(usuario);
-                                    }),
-                                    direction: DismissDirection.endToStart,
-                                    background: Container(
-                                      color: Colors.red,
-                                      padding: EdgeInsets.all(16),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                        children: [
-                                          Icon(
-                                            Icons.delete,
-                                            color: Colors.white,
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    child: ListTile(
-                                      onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (_) =>
-                                                    InfoAluno(usuario)));
-                                      },
-                                      title: Text(data["nome"]),
-                                      subtitle: Text(data["email"]),
-                                      trailing: Container(
-                                        child: Icon(
-                                          Icons.arrow_right_rounded,
-                                          color: Color(0xfff9aa33),
-                                        ),
-                                      ),
-                                    ),
-                                  ));
-                                }
-                                if (data["nome"]
-                                    .toString()
-                                    .toLowerCase()
-                                    .contains(_nomePesquisa.toLowerCase())) {
-                                  return ListTile(
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (_) =>
-                                                  InfoAluno(usuario)));
-                                    },
-                                    title: Text(data["nome"]),
-                                    subtitle: Text(data["email"]),
-                                    trailing: Container(
-                                      child: Icon(
-                                        Icons.arrow_right_rounded,
-                                        color: Color(0xfff9aa33),
-                                      ),
-                                    ),
-                                  );
-                                }
+                                  if (_nomePesquisa.isEmpty) {
+                                    return Card(
+                                        color: Color(0xff5f7481),
+                                        child: Dismissible(
+                                          key: UniqueKey(),
+                                          onDismissed: ((direction) {
+                                            _removerAluno(usuario);
+                                          }),
+                                          direction:
+                                              DismissDirection.endToStart,
+                                          background: Container(
+                                            color: Colors.red,
+                                            padding: EdgeInsets.all(16),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              children: [
+                                                Icon(
+                                                  Icons.delete,
+                                                  color: Colors.white,
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                          child: ListTile(
+                                            onTap: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (_) =>
+                                                          InfoAluno(usuario)));
+                                            },
+                                            title: Text(data["nome"],
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 18)),
+                                            subtitle: Text(data["email"],
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    fontSize: 16)),
+                                            trailing: Container(
+                                              child: Icon(
+                                                Icons.arrow_right_rounded,
+                                                color: Color(0xfff9aa33),
+                                              ),
+                                            ),
+                                          ),
+                                        ));
+                                  }
+                                  if (data["nome"]
+                                      .toString()
+                                      .toLowerCase()
+                                      .contains(_nomePesquisa.toLowerCase())) {
+                                    return Card(
+                                        color: Color(0xff5f7481),
+                                        child: ListTile(
+                                          onTap: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (_) =>
+                                                        InfoAluno(usuario)));
+                                          },
+                                          title: Text(data["nome"],
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 18)),
+                                          subtitle: Text(data["email"],
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.normal,
+                                                  fontSize: 16)),
+                                          trailing: Container(
+                                            child: Icon(
+                                              Icons.arrow_right_rounded,
+                                              color: Color(0xfff9aa33),
+                                            ),
+                                          ),
+                                        ));
+                                  }
 
-                                return Container();
-                              }))
+                                  return Container();
+                                })),
+                      )
                     ],
                   ),
                 );

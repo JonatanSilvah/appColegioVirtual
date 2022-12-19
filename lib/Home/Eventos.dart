@@ -42,48 +42,68 @@ class _EventosState extends State<Eventos> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar:
-            AppBar(title: Text("Eventos"), backgroundColor: Color(0xff344955)),
+        appBar: AppBar(
+          title: Text("Eventos"),
+          backgroundColor: Color(0xff0b222c),
+        ),
         body: StreamBuilder(
           stream: _controller.stream,
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
               case ConnectionState.waiting:
-                return Center(
-                  child: Column(
-                    children: [
-                      Text("Carregando eventos"),
-                      CircularProgressIndicator()
-                    ],
+                return Container(
+                  color: Color(0xff344955),
+                  child: Center(
+                    child: Column(
+                      children: [
+                        Text(
+                          "Carregando eventos",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        CircularProgressIndicator()
+                      ],
+                    ),
                   ),
                 );
               case ConnectionState.active:
               case ConnectionState.done:
-                return ListView.builder(
-                    itemCount: snapshot.data!.docs.length,
-                    itemBuilder: (context, index) {
-                      var data = snapshot.data!.docs[index].data()
-                          as Map<String, dynamic>;
-                      return Card(
-                        child: ListTile(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => InfoEvento()));
-                          },
-                          title: Text(data["nome"]),
-                          subtitle: Text(data["cidade"]),
-                          trailing: Container(
-                            child: Text(
-                              data["status"],
-                              style: TextStyle(color: Color(0xfff9aa33)),
+                return Container(
+                  color: Color(0xff344955),
+                  child: ListView.builder(
+                      itemCount: snapshot.data!.docs.length,
+                      itemBuilder: (context, index) {
+                        var data = snapshot.data!.docs[index].data()
+                            as Map<String, dynamic>;
+                        return Card(
+                          color: Color(0xff5f7481),
+                          child: ListTile(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => InfoEvento()));
+                            },
+                            title: Text(data["nome"],
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18)),
+                            subtitle: Text(data["cidade"],
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 16)),
+                            trailing: Container(
+                              child: Text(
+                                data["status"],
+                                style: TextStyle(color: Color(0xfff9aa33)),
+                              ),
                             ),
                           ),
-                        ),
-                      );
-                    });
+                        );
+                      }),
+                );
             }
           },
         ),

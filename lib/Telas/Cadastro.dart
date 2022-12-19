@@ -200,34 +200,28 @@ class _CadastroState extends State<Cadastro> {
     return Scaffold(
         appBar: AppBar(
           title: Text("Cadastro"),
-          backgroundColor: Color(0xffe3bb64),
+          backgroundColor: Color(0xff0b222c),
         ),
         body: Container(
+          color: Color(0xff344955),
           padding: EdgeInsets.all(16),
           child: SingleChildScrollView(
               child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              TextField(
-                  controller: _controllerNome,
-                  keyboardType: TextInputType.name,
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.fromLTRB(16, 8, 16, 8),
-                    hintText: "Nome completo",
-                    labelText: "Nome completo",
-                    labelStyle: TextStyle(
-                        color:
-                            _errorBorderNome ? Colors.red : Color(0xff70a83b)),
-                    filled: true,
-                    fillColor: Colors.white,
-                    errorText: _errorBorderNome ? _mensagemErro : null,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(color: Color(0xff74ac3c))),
-                  )),
+              InputCustomizado(
+                hint: "Nome",
+                controller: _controllerNome,
+                type: TextInputType.name,
+                mensagem: _errorBorderNome ? _mensagemErro : null,
+                icon: Icon(
+                  Icons.person,
+                  color: _errorBorderNome ? Colors.red : Colors.white,
+                ),
+                style: _errorBorderNome
+                    ? TextStyle(color: Colors.red)
+                    : TextStyle(color: Colors.white),
+              ),
               Gap(10),
               Row(
                 children: [
@@ -237,7 +231,7 @@ class _CadastroState extends State<Cadastro> {
                         fontWeight: FontWeight.normal,
                         fontSize: 18,
                         color:
-                            _errorBorderDataNasc ? Colors.red : Colors.black),
+                            _errorBorderDataNasc ? Colors.red : Colors.white),
                   ),
                   Gap(10),
                   ElevatedButton(
@@ -257,13 +251,15 @@ class _CadastroState extends State<Cadastro> {
                     },
                     child: Text(
                       "$outputDate",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                          color: Colors.black),
                     ),
                     style: ElevatedButton.styleFrom(
                         primary: _errorBorderDataNasc
                             ? Colors.red
-                            : Color(0xff70a83b),
+                            : Color(0xfff9aa33),
                         padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8))),
@@ -271,41 +267,38 @@ class _CadastroState extends State<Cadastro> {
                   Gap(10),
                 ],
               ),
-              TextField(
-                  controller: _controllerCPF,
-                  maxLength: 11,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.fromLTRB(16, 8, 16, 8),
-                    hintText: "CPF (somente números) ",
-                    labelText: "CPF",
-                    labelStyle: TextStyle(
-                        color:
-                            _errorBorderCPF ? Colors.red : Color(0xff70a83b)),
-                    filled: true,
-                    fillColor: Colors.white,
-                    errorText: _errorBorderCPF ? _mensagemErro : null,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(color: Color(0xff74ac3c))),
-                  )),
+              InputCustomizado(
+                hint: "CPF (somente números)",
+                controller: _controllerCPF,
+                type: TextInputType.number,
+                mensagem: _errorBorderCPF ? _mensagemErro : null,
+                icon: null,
+                style: _errorBorderCPF
+                    ? TextStyle(color: Colors.red)
+                    : TextStyle(color: Colors.white),
+              ),
               Gap(10),
               DropdownButtonFormField(
                 decoration: InputDecoration(
+                  fillColor: Color(0xfff9aa33),
+                  filled: true,
                   contentPadding: EdgeInsets.fromLTRB(16, 8, 16, 8),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
-                      borderSide: BorderSide(color: Color(0xff74ac3c))),
+                      borderSide: BorderSide(color: Colors.black)),
                 ),
-                icon: Icon(Icons.location_city),
+                icon: Icon(
+                  Icons.location_city,
+                  color: Colors.black,
+                ),
                 value: _escolhaDropDown,
-                hint: const Text("Escolha a cidade"),
+                hint: const Text(
+                  "Escolha a cidade",
+                  style: TextStyle(color: Colors.black),
+                ),
                 items: dropOpcoes,
                 onChanged: ((value) {
                   setState(() {
@@ -314,110 +307,69 @@ class _CadastroState extends State<Cadastro> {
                 }),
               ),
               Gap(10),
-              TextField(
-                  controller: _controllerEmail,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.fromLTRB(16, 8, 16, 8),
-                    hintText: "E-mail",
-                    labelText: "E-mail",
-                    labelStyle: TextStyle(
-                        color:
-                            _errorBorderEmail ? Colors.red : Color(0xff70a83b)),
-                    filled: true,
-                    fillColor: Colors.white,
-                    errorText: _errorBorderEmail ? _mensagemErro : null,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(color: Color(0xff70a83b))),
-                  )),
+              InputCustomizado(
+                hint: "E-mail",
+                controller: _controllerEmail,
+                type: TextInputType.number,
+                mensagem: _errorBorderEmail ? _mensagemErro : null,
+                icon: null,
+                style: _errorBorderEmail
+                    ? TextStyle(color: Colors.red)
+                    : TextStyle(color: Colors.white),
+              ),
               Gap(10),
-              TextField(
-                  maxLength: 11,
-                  controller: _controllerCelular,
-                  keyboardType: TextInputType.phone,
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.fromLTRB(16, 8, 16, 8),
-                    hintText: "Celular",
-                    labelText: "Celular",
-                    labelStyle: TextStyle(
-                        color: _errorBorderCelular
-                            ? Colors.red
-                            : Color(0xff70a83b)),
-                    filled: true,
-                    fillColor: Colors.white,
-                    errorText: _errorBorderCelular ? _mensagemErro : null,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(color: Color(0xff70a83b))),
-                  )),
+              InputCustomizado(
+                hint: "Celular",
+                controller: _controllerCelular,
+                type: TextInputType.number,
+                mensagem: _errorBorderCelular ? _mensagemErro : null,
+                icon: null,
+                style: _errorBorderCelular
+                    ? TextStyle(color: Colors.red)
+                    : TextStyle(color: Colors.white),
+              ),
               Gap(10),
-              TextField(
-                  controller: _controllerSenha,
-                  obscureText: true,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.fromLTRB(16, 8, 16, 8),
-                    hintText: "Senha",
-                    labelText: "Senha",
-                    labelStyle: TextStyle(
-                        color:
-                            _errorBorderSenha ? Colors.red : Color(0xff70a83b)),
-                    filled: true,
-                    fillColor: Colors.white,
-                    errorText: _errorBorderSenha ? _mensagemErro : null,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(color: Color(0xff70a83b))),
-                  )),
+              InputCustomizado(
+                hint: "Senha",
+                controller: _controllerSenha,
+                type: TextInputType.number,
+                mensagem: _errorBorderSenha ? _mensagemErro : null,
+                icon: null,
+                style: _errorBorderSenha
+                    ? TextStyle(color: Colors.red)
+                    : TextStyle(color: Colors.white),
+              ),
               Gap(10),
-              TextField(
-                  controller: _controllerConfSenha,
-                  obscureText: true,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.fromLTRB(16, 8, 16, 8),
-                    hintText: "Confirmar senha",
-                    labelText: "confirmar senha",
-                    labelStyle: TextStyle(
-                        color:
-                            _errorBorderSenha ? Colors.red : Color(0xff70a83b)),
-                    filled: true,
-                    fillColor: Colors.white,
-                    errorText: _errorBorderSenha ? _mensagemErro : null,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(color: Color(0xff70a83b))),
-                  )),
+              InputCustomizado(
+                hint: "Senha",
+                controller: _controllerConfSenha,
+                type: TextInputType.number,
+                mensagem: _errorBorderSenha ? _mensagemErro : null,
+                icon: null,
+                style: _errorBorderSenha
+                    ? TextStyle(color: Colors.red)
+                    : TextStyle(color: Colors.white),
+              ),
               Gap(12),
-              ElevatedButton(
-                onPressed: () {
+              InkWell(
+                onTap: () {
                   _validarCampos();
                 },
-                child: Text(
-                  "Cadastrar",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
+                child: Container(
+                  height: 50,
+                  child: Center(
+                      child: Text(
+                    "Cadastrar",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  )),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      gradient: LinearGradient(
+                          colors: [Color(0xffe3bb64), Color(0xfff9aa33)])),
                 ),
-                style: ElevatedButton.styleFrom(
-                    primary: Color(0xff70a83b),
-                    padding: EdgeInsets.fromLTRB(32, 16, 32, 16),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(32))),
               ),
             ],
           )),

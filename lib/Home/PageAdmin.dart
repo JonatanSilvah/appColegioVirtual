@@ -13,7 +13,7 @@ import 'package:projeto_cbq/Rotas.dart';
 import 'package:projeto_cbq/Telas/Login.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
-import 'package:flutter_full_pdf_viewer/flutter_full_pdf_viewer.dart';
+
 import 'package:share_extend/share_extend.dart';
 
 import 'Alunos.dart';
@@ -68,10 +68,12 @@ class _PageAdminState extends State<PageAdmin> {
             drawer(_nomeUsuario.toString(), _emailUsuario.toString(), context),
         appBar: AppBar(
           title: Text("App Colegio"),
-          backgroundColor: Color(0xff344955),
+          backgroundColor: Color(0xff0b222c),
           centerTitle: true,
         ),
-        body: Container());
+        body: Container(
+          color: Color(0xff344955),
+        ));
   }
 }
 

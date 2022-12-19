@@ -104,7 +104,7 @@ class _AddAlunoState extends State<AddAluno> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xff344955),
+        backgroundColor: Color(0xff0b222c),
         title: TextField(
           decoration: InputDecoration(
               contentPadding: EdgeInsets.fromLTRB(12, 6, 12, 6),
@@ -117,7 +117,7 @@ class _AddAlunoState extends State<AddAluno> {
               filled: true,
               hoverColor: Colors.white,
               fillColor: Colors.white,
-              hintText: "pesquisar",
+              hintText: "Pesquisar alunos",
               labelStyle: TextStyle(color: Colors.white),
               focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(32),
@@ -148,112 +148,155 @@ class _AddAlunoState extends State<AddAluno> {
             case ConnectionState.done:
               QuerySnapshot? querySnapshot = snapshot.data;
               List<DocumentSnapshot> alunos = querySnapshot!.docs.toList();
-              return ListView.builder(
-                itemCount: snapshot.data!.docs.length,
-                itemBuilder: (context, index) {
-                  var data =
-                      snapshot.data!.docs[index].data() as Map<String, dynamic>;
+              return Container(
+                color: Color(0xff344955),
+                child: ListView.builder(
+                  itemCount: snapshot.data!.docs.length,
+                  itemBuilder: (context, index) {
+                    var data = snapshot.data!.docs[index].data()
+                        as Map<String, dynamic>;
 
-                  Usuario usuario = Usuario();
-                  usuario.nome = data["nome"];
-                  usuario.celularUsuario = data["celular"];
-                  usuario.cidadeUsuario = data["cidade"];
-                  usuario.cpfUsuario = data["cpf"];
-                  usuario.dataNasc = data["dataNasc"];
-                  usuario.email = data["email"];
-                  usuario.idUsuario = data["idUsuario"];
+                    Usuario usuario = Usuario();
+                    usuario.nome = data["nome"];
+                    usuario.celularUsuario = data["celular"];
+                    usuario.cidadeUsuario = data["cidade"];
+                    usuario.cpfUsuario = data["cpf"];
+                    usuario.dataNasc = data["dataNasc"];
+                    usuario.email = data["email"];
+                    usuario.idUsuario = data["idUsuario"];
 
-                  if (_nomePesquisa.isEmpty &&
-                      _alunsoSalvos.contains(usuario.idUsuario) == false) {
-                    return Card(
-                      child: ListTile(
-                        onTap: () {
-                          showDialog(
-                              context: context,
-                              builder: (context) {
-                                return AlertDialog(
-                                  backgroundColor: Color(0xfff9aa33),
-                                  title: Text("Adicionar contato"),
-                                  content: Text(
-                                    "Tem certeza que deseja adicionar o aluno: ${data["nome"]} na turma ${widget.nomeTurma}?",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.normal,
-                                        fontSize: 16),
-                                  ),
-                                  actions: [
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
-                                      child: Text("Cancelar"),
-                                      style: ElevatedButton.styleFrom(
-                                          primary: Color(0xff344955)),
+                    if (_nomePesquisa.isEmpty &&
+                        _alunsoSalvos.contains(usuario.idUsuario) == false) {
+                      return Card(
+                        color: Color(0xff5f7481),
+                        child: ListTile(
+                          onTap: () {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    backgroundColor: Color(0xff5f7481),
+                                    title: Text(
+                                      "Adicionar contato",
+                                      style: TextStyle(color: Colors.white),
                                     ),
-                                    ElevatedButton(
+                                    content: Text(
+                                      "Tem certeza que deseja adicionar o aluno: ${data["nome"]} na turma ${widget.nomeTurma}?",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.normal,
+                                          fontSize: 16,
+                                          color: Colors.white),
+                                    ),
+                                    actions: [
+                                      ElevatedButton(
                                         onPressed: () {
-                                          _adicionarAluno(usuario);
                                           Navigator.pop(context);
                                         },
-                                        child: Text("Confirmar"),
+                                        child: Text(
+                                          "Cancelar",
+                                          style: TextStyle(color: Colors.black),
+                                        ),
                                         style: ElevatedButton.styleFrom(
-                                            primary: Color(0xff344955)))
-                                  ],
-                                );
-                              });
-                        },
-                        title: Text(data["nome"]),
-                        subtitle: Text(data["email"]),
-                      ),
-                    );
-                  }
+                                            primary: Color(0xffffdc65)),
+                                      ),
+                                      ElevatedButton(
+                                          onPressed: () {
+                                            _adicionarAluno(usuario);
+                                            Navigator.pop(context);
+                                          },
+                                          child: Text(
+                                            "Confirmar",
+                                            style:
+                                                TextStyle(color: Colors.black),
+                                          ),
+                                          style: ElevatedButton.styleFrom(
+                                              primary: Color(0xffffdc65)))
+                                    ],
+                                  );
+                                });
+                          },
+                          title: Text(data["nome"],
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18)),
+                          subtitle: Text(data["email"],
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 16)),
+                        ),
+                      );
+                    }
 
-                  if (data["nome"]
-                          .toString()
-                          .toLowerCase()
-                          .contains(_nomePesquisa.toLowerCase()) &&
-                      _alunsoSalvos.contains(usuario.idUsuario) == false) {
-                    return ListTile(
-                      onTap: () {
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                backgroundColor: Color(0xffe3bb64),
-                                title: Text("Adicionar contato"),
-                                content: Text(
-                                  "Tem certeza que deseja adicionar o aluno: ${data["nome"]} na turma ${widget.nomeTurma}?",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.normal,
-                                      fontSize: 16),
-                                ),
-                                actions: [
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text("Cancelar"),
-                                    style: ElevatedButton.styleFrom(
-                                        primary: Colors.black),
-                                  ),
-                                  ElevatedButton(
-                                      onPressed: () {
-                                        _adicionarAluno(usuario);
-                                        Navigator.pop(context);
-                                      },
-                                      child: Text("Confirmar"),
-                                      style: ElevatedButton.styleFrom(
-                                          primary: Colors.black))
-                                ],
-                              );
-                            });
-                      },
-                      title: Text(data["nome"]),
-                      subtitle: Text(data["email"]),
-                    );
-                  }
+                    if (data["nome"]
+                            .toString()
+                            .toLowerCase()
+                            .contains(_nomePesquisa.toLowerCase()) &&
+                        _alunsoSalvos.contains(usuario.idUsuario) == false) {
+                      return Card(
+                        color: Color(0xff5f7481),
+                        child: ListTile(
+                          onTap: () {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    backgroundColor: Color(0xff5f7481),
+                                    title: Text("Adicionar contato",
+                                        style: TextStyle(color: Colors.white)),
+                                    content: Text(
+                                      "Tem certeza que deseja adicionar o aluno: ${data["nome"]} na turma ${widget.nomeTurma}?",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.normal,
+                                          fontSize: 16,
+                                          color: Colors.white),
+                                    ),
+                                    actions: [
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text(
+                                          "Cancelar",
+                                          style: TextStyle(color: Colors.black),
+                                        ),
+                                        style: ElevatedButton.styleFrom(
+                                            primary: Color(0xffffdc65)),
+                                      ),
+                                      ElevatedButton(
+                                          onPressed: () {
+                                            _adicionarAluno(usuario);
+                                            Navigator.pop(context);
+                                          },
+                                          child: Text(
+                                            "Confirmar",
+                                            style:
+                                                TextStyle(color: Colors.black),
+                                          ),
+                                          style: ElevatedButton.styleFrom(
+                                              primary: Color(0xffffdc65)))
+                                    ],
+                                  );
+                                });
+                          },
+                          title: Text(data["nome"],
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18)),
+                          subtitle: Text(data["email"],
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 16)),
+                        ),
+                      );
+                    }
 
-                  return Container();
-                },
+                    return Container();
+                  },
+                ),
               );
           }
         },

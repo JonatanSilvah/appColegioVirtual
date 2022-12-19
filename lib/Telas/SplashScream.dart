@@ -24,13 +24,19 @@ class _SplashScreamState extends State<SplashScream> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-          color: Colors.white,
+          height: 250,
+          width: 250,
+          color: Color(0xfff9aa33),
           padding: EdgeInsets.all(60),
-          child: Center(
-            child: Image.asset(
-              "images/logoCBQ.png",
-              fit: BoxFit.cover,
-            ),
+          child: Column(
+            children: [
+              Center(
+                child: Text(
+                  "LOGO",
+                  style: TextStyle(color: Colors.black),
+                ),
+              )
+            ],
           )),
     );
   }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 import 'package:projeto_cbq/Home/Eventos.dart';
+import 'package:projeto_cbq/Telas/InputCustomizado.dart';
 import 'package:projeto_cbq/model/ModelEvento.dart';
 import 'package:projeto_cbq/model/ModelTurma.dart';
 
@@ -161,34 +162,28 @@ class _CriarEventoState extends State<CriarEvento> {
     var outputDateFinal = outputFormat.format(dateFinal);
     return Scaffold(
       appBar: AppBar(
-          title: Text("Criar evento"), backgroundColor: Color(0xff344955)),
+          title: Text("Criar evento"), backgroundColor: Color(0xff0b222c)),
       body: Container(
+        color: Color(0xff344955),
         padding: EdgeInsets.all(16),
         child: SingleChildScrollView(
             child: Column(
           children: [
-            TextField(
-                controller: _controllerNome,
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.fromLTRB(16, 8, 16, 8),
-                  hintText: "Nome do evento",
-                  labelText: "Nome evento",
-                  labelStyle: TextStyle(
-                      color: _errorBorderNome ? Colors.red : Colors.black),
-                  filled: true,
-                  errorText: _errorBorderNome ? _mensagemErro : null,
-                  fillColor: Colors.white,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                )),
+            InputCustomizado(
+              hint: "Nome do evento",
+              type: TextInputType.name,
+              controller: _controllerNome,
+              mensagem: _errorBorderNome ? _mensagemErro : null,
+              icon: null,
+              style: _errorBorderNome
+                  ? TextStyle(color: Colors.red)
+                  : TextStyle(color: Colors.white),
+            ),
             Gap(10),
             DropdownButtonFormField(
               decoration: InputDecoration(
+                fillColor: Color(0xfff9aa33),
+                filled: true,
                 contentPadding: EdgeInsets.fromLTRB(16, 8, 16, 8),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
@@ -198,7 +193,10 @@ class _CriarEventoState extends State<CriarEvento> {
                   borderRadius: BorderRadius.circular(8),
                 ),
               ),
-              icon: Icon(Icons.location_city),
+              icon: Icon(
+                Icons.location_city,
+                color: _errorBorderCidade ? Colors.red : Colors.black,
+              ),
               value: _escolhaDropDown,
               hint: Text("Escolha a cidade",
                   style: TextStyle(
@@ -213,6 +211,8 @@ class _CriarEventoState extends State<CriarEvento> {
             Gap(10),
             DropdownButtonFormField(
               decoration: InputDecoration(
+                fillColor: Color(0xfff9aa33),
+                filled: true,
                 contentPadding: EdgeInsets.fromLTRB(16, 8, 16, 8),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
@@ -222,7 +222,10 @@ class _CriarEventoState extends State<CriarEvento> {
                   borderRadius: BorderRadius.circular(8),
                 ),
               ),
-              icon: Icon(Icons.location_city),
+              icon: Icon(
+                Icons.location_city,
+                color: _errorBorderTurma ? Colors.red : Colors.black,
+              ),
               value: _escolhaDropDownTurma,
               hint: Text("Escolha a turma",
                   style: TextStyle(
@@ -241,7 +244,7 @@ class _CriarEventoState extends State<CriarEvento> {
               style: TextStyle(
                   fontWeight: FontWeight.normal,
                   fontSize: 18,
-                  color: Colors.black),
+                  color: Color(0xfff9aa33)),
             ),
             Gap(10),
             ElevatedButton(
@@ -279,7 +282,7 @@ class _CriarEventoState extends State<CriarEvento> {
               style: TextStyle(
                   fontWeight: FontWeight.normal,
                   fontSize: 18,
-                  color: Colors.black),
+                  color: Color(0xfff9aa33)),
             ),
             Gap(10),
             ElevatedButton(
@@ -321,11 +324,12 @@ class _CriarEventoState extends State<CriarEvento> {
               style: TextStyle(
                   fontWeight: FontWeight.normal,
                   fontSize: 18,
-                  color: Colors.black),
+                  color: Color(0xfff9aa33)),
             ),
             TextField(
                 controller: _controllerDescricao,
                 maxLines: 5,
+                style: TextStyle(color: Colors.black),
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.fromLTRB(16, 8, 16, 8),
@@ -334,7 +338,7 @@ class _CriarEventoState extends State<CriarEvento> {
                           ? Colors.red
                           : Color(0xfff9aa33)),
                   filled: true,
-                  fillColor: Colors.white,
+                  fillColor: Color(0xffffdc65),
                   errorText: _errorBorderDescricao ? _mensagemErro : null,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),

@@ -13,7 +13,10 @@ class _ConfiguracaoState extends State<Configuracao> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Configuração"),
-        backgroundColor: Color(0xff344955),
+        backgroundColor: Color(0xff0b222c),
+      ),
+      body: Container(
+        color: Color(0xff344955),
       ),
     );
   }

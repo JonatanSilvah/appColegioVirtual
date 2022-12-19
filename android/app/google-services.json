@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "835334941931",
+    "project_id": "cbq-projeto",
+    "storage_bucket": "cbq-projeto.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:835334941931:android:d3f05ba3ea075e4323e2ae",
+        "android_client_info": {
+          "package_name": "com.example.projeto_cbq"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "835334941931-q0qil88es1lc5ffcr51mspusu6uj5gv0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_6-TruGTMLON5MILRL36j5d2C5oObtyE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "835334941931-q0qil88es1lc5ffcr51mspusu6uj5gv0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

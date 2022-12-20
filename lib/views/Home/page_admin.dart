@@ -1,24 +1,18 @@
-import 'dart:io';
-import 'package:path_provider/path_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
-import 'package:get/get.dart';
-import 'package:path_provider/path_provider.dart';
-
-import 'package:projeto_cbq/Home/turma.dart';
 import 'package:projeto_cbq/Rotas.dart';
-import 'package:projeto_cbq/Telas/login.dart';
-import 'package:pdf/pdf.dart';
-import 'package:pdf/widgets.dart' as pw;
 
-import 'package:share_extend/share_extend.dart';
+import 'package:projeto_cbq/views/Home/page_aluno.dart';
 
-import 'Alunos.dart';
-import 'config.dart';
-import 'Eventos.dart';
+import 'package:projeto_cbq/views/alunos/page_aluno.dart';
+import 'package:projeto_cbq/views/config/config.dart';
+import 'package:projeto_cbq/views/eventos/home_eventos.dart';
+import 'package:projeto_cbq/views/login_cadastro/login.dart';
+import 'package:projeto_cbq/views/turmas/home_turma.dart';
+import 'dart:async';
+
+import 'package:projeto_cbq/views/turmas/home_turma.dart';
 
 class PageAdmin extends StatefulWidget {
   const PageAdmin({super.key});
@@ -47,11 +41,9 @@ class _PageAdminState extends State<PageAdmin> {
 
       setState(() {
         _nomeUsuario = dados!["nome"];
-        _emailUsuario = dados!["email"];
+        _emailUsuario = dados["email"];
       });
-    } else if (usuarioAtual == null) {
-      Navigator.pushNamedAndRemoveUntil(context, "/", (route) => false);
-    }
+    } else if (usuarioAtual == null) {}
   }
 
   @override
@@ -145,7 +137,8 @@ Widget menuItem(
 Future<void> selectedItem(BuildContext context, int index) async {
   switch (index) {
     case 0:
-      Navigator.of(context).push(MaterialPageRoute(builder: (_) => Alunos()));
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (_) => pageAluno()));
       break;
     case 1:
       Navigator.of(context).push(MaterialPageRoute(builder: (_) => Turma()));

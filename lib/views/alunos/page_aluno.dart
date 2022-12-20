@@ -2,18 +2,15 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:projeto_cbq/models/user.dart';
+import 'package:projeto_cbq/views/alunos/info_aluno.dart';
 
-import '../Alunos/InfoAluno.dart';
-import '../model/user.dart';
-
-class Alunos extends StatefulWidget {
-  const Alunos({super.key});
-
+class pageAluno extends StatefulWidget {
   @override
-  State<Alunos> createState() => _AlunosState();
+  State<pageAluno> createState() => _pageAlunoState();
 }
 
-class _AlunosState extends State<Alunos> {
+class _pageAlunoState extends State<pageAluno> {
   final _controller = StreamController<QuerySnapshot>.broadcast();
   FirebaseFirestore db = FirebaseFirestore.instance;
   String _nomePesquisa = "";
@@ -125,7 +122,7 @@ class _AlunosState extends State<Alunos> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (_) => InfoAluno(usuario)));
+                                        builder: (_) => infoAluno(usuario)));
                               },
                               title: Text(
                                 data["nome"],
@@ -162,7 +159,7 @@ class _AlunosState extends State<Alunos> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (_) => InfoAluno(usuario)));
+                                        builder: (_) => infoAluno(usuario)));
                               },
                               title: Text(
                                 data["nome"],
@@ -177,6 +174,12 @@ class _AlunosState extends State<Alunos> {
                                     color: Colors.white,
                                     fontWeight: FontWeight.normal,
                                     fontSize: 16),
+                              ),
+                              trailing: Container(
+                                child: Icon(
+                                  Icons.arrow_right_rounded,
+                                  color: Color(0xfff9aa33),
+                                ),
                               ),
                             ),
                           );

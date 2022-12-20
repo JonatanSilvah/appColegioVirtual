@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:projeto_cbq/Telas/inputCustom.dart';
-import 'package:projeto_cbq/model/modelTurma.dart';
+import 'package:projeto_cbq/views/custom/input_custom.dart';
+import 'package:projeto_cbq/models/modelTurma.dart';
 
 class AdicionarTurma extends StatefulWidget {
   const AdicionarTurma({super.key});
@@ -186,10 +186,7 @@ class _AdicionarTurmaState extends State<AdicionarTurma> {
                       borderRadius: BorderRadius.circular(10))),
             ),
             Gap(12),
-            Text(
-              _mensagemSucesso,
-              style: TextStyle(color: Color(0xff70a83b)),
-            )
+           
           ],
         )),
       ),

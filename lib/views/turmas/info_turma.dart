@@ -1,22 +1,18 @@
 import 'dart:async';
-import 'dart:io';
-import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:get/get.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:projeto_cbq/Alunos/InfoAluno.dart';
-import 'package:projeto_cbq/Turma/addAlunoTurma.dart';
-import 'package:pdf/pdf.dart';
-import 'package:pdf/widgets.dart' as pw;
 
-import 'package:projeto_cbq/model/modelEvento.dart';
 
-import '../model/user.dart';
+import 'package:projeto_cbq/models/modelEvento.dart';
+import 'package:projeto_cbq/models/user.dart';
+import 'package:projeto_cbq/views/alunos/info_aluno.dart';
+import 'package:projeto_cbq/views/turmas/add_aluno_turma.dart';
+
+import 'package:projeto_cbq/views/alunos/info_aluno.dart';
 
 class InfoTurma extends StatefulWidget {
   String? idTurma;
@@ -68,6 +64,7 @@ class _InfoTurmaState extends State<InfoTurma> {
         .delete();
 
     await _adicionarListenerTurma();
+    await _recuperarEventos();
   }
 
   List<ModelEvento> _eventosSalvos = [];
@@ -396,7 +393,7 @@ class _InfoTurmaState extends State<InfoTurma> {
                                                   context,
                                                   MaterialPageRoute(
                                                       builder: (_) =>
-                                                          InfoAluno(usuario)));
+                                                          infoAluno(usuario)));
                                             },
                                             title: Text(data["nome"],
                                                 style: TextStyle(
@@ -430,7 +427,7 @@ class _InfoTurmaState extends State<InfoTurma> {
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (_) =>
-                                                        InfoAluno(usuario)));
+                                                        infoAluno(usuario)));
                                           },
                                           title: Text(data["nome"],
                                               style: TextStyle(

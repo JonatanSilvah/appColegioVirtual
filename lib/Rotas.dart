@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_cbq/Home/PageAluno.dart';
+import 'package:projeto_cbq/views/Home/page_aluno.dart';
 
-import 'Home/pageAdmin.dart';
-import 'Telas/cadastro.dart';
-import 'Telas/login.dart';
+import 'package:projeto_cbq/views/login_cadastro/cadastro.dart';
+import 'package:projeto_cbq/views/login_cadastro/login.dart';
+
+import 'views/Home/page_admin.dart';
+
 
 class Rotas {
   static const String ROTA_CADASTRO = "/cadastro";

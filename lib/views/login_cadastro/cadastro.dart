@@ -1,16 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 import 'package:cpf_cnpj_validator/cpf_validator.dart';
-import 'package:projeto_cbq/Home/PageAluno.dart';
-import 'package:projeto_cbq/Rotas.dart';
 
-import '../model/user.dart';
-import 'inputCustom.dart';
+import 'package:projeto_cbq/Rotas.dart';
+import 'package:projeto_cbq/views/Home/page_aluno.dart';
+import 'package:projeto_cbq/views/custom/input_custom.dart';
+import 'package:projeto_cbq/models/user.dart';
+
+
 
 class Cadastro extends StatefulWidget {
   const Cadastro({super.key});

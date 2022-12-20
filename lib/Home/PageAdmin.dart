@@ -8,16 +8,16 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 
-import 'package:projeto_cbq/Home/Turma.dart';
+import 'package:projeto_cbq/Home/turma.dart';
 import 'package:projeto_cbq/Rotas.dart';
-import 'package:projeto_cbq/Telas/Login.dart';
+import 'package:projeto_cbq/Telas/login.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
 import 'package:share_extend/share_extend.dart';
 
 import 'Alunos.dart';
-import 'Configuracao.dart';
+import 'config.dart';
 import 'Eventos.dart';
 
 class PageAdmin extends StatefulWidget {

@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../Alunos/InfoAluno.dart';
-import '../model/Usuario.dart';
+import '../model/user.dart';
 
 class Alunos extends StatefulWidget {
   const Alunos({super.key});

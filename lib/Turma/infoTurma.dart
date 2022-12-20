@@ -10,13 +10,13 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:projeto_cbq/Alunos/InfoAluno.dart';
-import 'package:projeto_cbq/Turma/AdicionarAlunoTurma.dart';
+import 'package:projeto_cbq/Turma/addAlunoTurma.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
-import 'package:projeto_cbq/model/ModelEvento.dart';
+import 'package:projeto_cbq/model/modelEvento.dart';
 
-import '../model/Usuario.dart';
+import '../model/user.dart';
 
 class InfoTurma extends StatefulWidget {
   String? idTurma;

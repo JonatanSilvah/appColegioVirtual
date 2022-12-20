@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:projeto_cbq/Telas/Login.dart';
+import 'package:projeto_cbq/Telas/login.dart';
 
 class PageAluno extends StatefulWidget {
   const PageAluno({super.key});

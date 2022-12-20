@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:gap/gap.dart';
-import 'package:projeto_cbq/model/Usuario.dart';
+import 'package:projeto_cbq/model/user.dart';
 
 class InfoAluno extends StatefulWidget {
   Usuario usuario;

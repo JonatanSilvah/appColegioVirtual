@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:projeto_cbq/Telas/Login.dart';
+import 'package:projeto_cbq/Telas/login.dart';
 
 class SplashScream extends StatefulWidget {
   const SplashScream({super.key});

@@ -6,11 +6,11 @@ import 'package:get/get.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:projeto_cbq/Telas/Cadastro.dart';
-import 'package:projeto_cbq/Telas/InputCustomizado.dart';
+import 'package:projeto_cbq/Telas/cadastro.dart';
+import 'package:projeto_cbq/Telas/inputCustom.dart';
 import 'package:projeto_cbq/Rotas.dart';
 
-import '../model/Usuario.dart';
+import '../model/user.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});

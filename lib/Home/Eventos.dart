@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
-import 'package:projeto_cbq/Eventos/CriarEnveto.dart';
+import 'package:projeto_cbq/Eventos/addEvento.dart';
 import 'package:projeto_cbq/Eventos/InfoEvento.dart';
 
 class Eventos extends StatefulWidget {

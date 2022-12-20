@@ -6,7 +6,7 @@ Será possível cadastrar as turmas, com ano de início e ano de fim, vincular a
 As funcionalidades de usuários com acesso de Aluno ainda serão desenvolvidas.
 
 
-## Getting Started
+## Como iniciar
 
 Dart version 2.18.5, flutter version <3.0.0
 

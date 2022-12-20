@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../Alunos/InfoAluno.dart';
-import '../model/user.dart';
+import '../models/user.dart';
 
 class Alunos extends StatefulWidget {
   const Alunos({super.key});
@@ -177,6 +177,12 @@ class _AlunosState extends State<Alunos> {
                                     color: Colors.white,
                                     fontWeight: FontWeight.normal,
                                     fontSize: 16),
+                              ),
+                              trailing: Container(
+                                child: Icon(
+                                  Icons.arrow_right_rounded,
+                                  color: Color(0xfff9aa33),
+                                ),
                               ),
                             ),
                           );

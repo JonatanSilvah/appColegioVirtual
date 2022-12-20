@@ -14,9 +14,9 @@ import 'package:projeto_cbq/Turma/addAlunoTurma.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
-import 'package:projeto_cbq/model/modelEvento.dart';
+import 'package:projeto_cbq/models/modelEvento.dart';
 
-import '../model/user.dart';
+import '../models/user.dart';
 
 class InfoTurma extends StatefulWidget {
   String? idTurma;
@@ -68,6 +68,7 @@ class _InfoTurmaState extends State<InfoTurma> {
         .delete();
 
     await _adicionarListenerTurma();
+    await _recuperarEventos();
   }
 
   List<ModelEvento> _eventosSalvos = [];

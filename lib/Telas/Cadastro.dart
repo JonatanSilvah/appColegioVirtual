@@ -9,7 +9,7 @@ import 'package:cpf_cnpj_validator/cpf_validator.dart';
 import 'package:projeto_cbq/Home/PageAluno.dart';
 import 'package:projeto_cbq/Rotas.dart';
 
-import '../model/user.dart';
+import '../models/user.dart';
 import 'inputCustom.dart';
 
 class Cadastro extends StatefulWidget {

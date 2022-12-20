@@ -5,8 +5,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:projeto_cbq/Home/turma.dart';
-import 'package:projeto_cbq/model/modelTurma.dart';
-import 'package:projeto_cbq/model/user.dart';
+import 'package:projeto_cbq/models/modelTurma.dart';
+import 'package:projeto_cbq/models/user.dart';
 
 class AddAluno extends StatefulWidget {
   String? idTurma;

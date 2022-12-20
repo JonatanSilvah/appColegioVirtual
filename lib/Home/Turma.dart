@@ -6,7 +6,7 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:projeto_cbq/Turma/addTurma.dart';
 import 'package:projeto_cbq/Turma/infoTurma.dart';
-import 'package:projeto_cbq/model/modelTurma.dart';
+import 'package:projeto_cbq/models/modelTurma.dart';
 
 class Turma extends StatefulWidget {
   const Turma({super.key});

@@ -9,8 +9,11 @@ import 'package:gap/gap.dart';
 import 'package:projeto_cbq/Telas/cadastro.dart';
 import 'package:projeto_cbq/Telas/inputCustom.dart';
 import 'package:projeto_cbq/Rotas.dart';
+import 'package:projeto_cbq/controllers/logar_usuario.dart';
+import 'package:projeto_cbq/controllers/validar_login.dart';
+import 'package:projeto_cbq/controllers/verificar_usuario_logado.dart';
 
-import '../model/user.dart';
+import '../models/user.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -20,129 +23,16 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
+  final validarCampos _controllerCampos = validarCampos();
+  final verificarUsuarioLogado _controlerUsuarioLogado =
+      verificarUsuarioLogado();
   var _controllerEmail = TextEditingController();
   var _controllerSenha = TextEditingController();
-  FirebaseAuth auth = FirebaseAuth.instance;
-  FirebaseFirestore db = FirebaseFirestore.instance;
-  AnimationController? _controller;
-
-  Animation<double>? _animacaoSize;
-
-  String? _tipoUsuario;
-  String? _idUsuario;
-  String? _mensagemErro = "";
-  String? _mensagemErroLogar = "";
-  bool _errorBorderEmail = false;
-  bool _errorBorderSenha = false;
-
-  _validarCampos() {
-    String email = _controllerEmail.text.trim();
-    String senha = _controllerSenha.text.trim();
-
-    if (email.isEmpty) {
-      setState(() {
-        _mensagemErro = "Preencha o email";
-        _errorBorderEmail = true;
-        _errorBorderSenha = false;
-      });
-    } else if (!GetUtils.isEmail(email)) {
-      setState(() {
-        _mensagemErro = "Preencha o email com um e-mail válido";
-        _errorBorderEmail = true;
-        _errorBorderSenha = false;
-      });
-    } else if (senha.isEmpty) {
-      setState(() {
-        _mensagemErro = "Preenche a senha";
-        _errorBorderSenha = true;
-        _errorBorderEmail = false;
-      });
-    } else {
-      setState(() {
-        _mensagemErro = "";
-        _errorBorderEmail = false;
-        _errorBorderSenha = false;
-      });
-      Usuario usuario = Usuario();
-
-      usuario.senha = senha;
-      usuario.email = email;
-      _logarUsuario(usuario);
-    }
-  }
-
-  _logarUsuario(Usuario usuario) async {
-    auth
-        .signInWithEmailAndPassword(
-            email: usuario.email, password: usuario.senha)
-        .then((value) async {
-      setState(() {
-        _idUsuario = value.user!.uid;
-      });
-
-      final snapshot = await db.collection("usuarios").doc(_idUsuario).get();
-
-      final dados = snapshot.data();
-
-      setState(() {
-        _tipoUsuario = dados!["tipo"];
-      });
-      if (_tipoUsuario == "aluno") {
-        Navigator.pushNamedAndRemoveUntil(
-            context, "/page-aluno", (route) => false);
-      } else {
-        Navigator.pushNamedAndRemoveUntil(
-            context, "/page-admin", (route) => false);
-      }
-    }).catchError((Error) {
-      setState(() {
-        _mensagemErroLogar = "Não foi possível logar, verifique email e senha!";
-      });
-    });
-  }
-
-  _verificarUsuarioLogado() async {
-    User? usuarioAtual = await auth.currentUser;
-
-    if (usuarioAtual != null) {
-      setState(() {
-        _idUsuario = usuarioAtual.uid;
-      });
-      final snapshot = await db.collection("usuarios").doc(_idUsuario).get();
-
-      final dados = snapshot.data();
-
-      setState(() {
-        _tipoUsuario = dados!["tipoUsuario"];
-      });
-
-      if (_tipoUsuario == "aluno") {
-        Navigator.pushNamedAndRemoveUntil(
-            context, "/page-aluno", (route) => false);
-      } else if (_tipoUsuario == "gestor") {
-        Navigator.pushNamedAndRemoveUntil(
-            context, "/page-admin", (route) => false);
-      }
-    }
-  }
 
   @override
   void initState() {
-    _verificarUsuarioLogado();
+    _controlerUsuarioLogado.verificaUsuarioLogado(context);
     super.initState();
-
-    _controller =
-        AnimationController(duration: Duration(seconds: 1), vsync: this);
-    _animacaoSize = Tween<double>(begin: 0, end: 1000).animate(
-        CurvedAnimation(parent: _controller!, curve: Curves.decelerate));
-
-    _controller!.forward();
-  }
-
-  @override
-  void dispose() {
-    _controller!.dispose();
-    super.dispose();
   }
 
   @override
@@ -178,7 +68,7 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                     Column(
                       children: [
                         Text(
-                          _mensagemErroLogar!,
+                          _controllerCampos.mensagemErroLogar,
                           style: TextStyle(
                               color: Colors.red, fontWeight: FontWeight.bold),
                         ),
@@ -186,13 +76,16 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                           controller: _controllerEmail,
                           hint: "E-mail",
                           type: TextInputType.emailAddress,
-                          mensagem: _errorBorderEmail ? _mensagemErro : null,
+                          mensagem: _controllerCampos.errorBorderEmail
+                              ? _controllerCampos.mensagemErro
+                              : null,
                           icon: Icon(
                             Icons.email,
-                            color:
-                                _errorBorderEmail ? Colors.red : Colors.white,
+                            color: _controllerCampos.errorBorderEmail
+                                ? Colors.red
+                                : Colors.white,
                           ),
-                          style: _errorBorderEmail
+                          style: _controllerCampos.errorBorderEmail
                               ? TextStyle(color: Colors.red)
                               : TextStyle(color: Colors.white),
                         ),
@@ -201,13 +94,15 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                           controller: _controllerSenha,
                           hint: "senha",
                           type: TextInputType.text,
-                          mensagem: _errorBorderSenha ? _mensagemErro : null,
+                          mensagem: _controllerCampos.errorBorderSenha
+                              ? _controllerCampos.mensagemErro
+                              : null,
                           obscure: true,
                           icon: Icon(Icons.lock,
-                              color: _errorBorderSenha
+                              color: _controllerCampos.errorBorderSenha
                                   ? Colors.red
                                   : Colors.white),
-                          style: _errorBorderSenha
+                          style: _controllerCampos.errorBorderSenha
                               ? TextStyle(color: Colors.red)
                               : TextStyle(color: Colors.white),
                         )
@@ -216,7 +111,11 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                     Gap(20),
                     InkWell(
                       onTap: () {
-                        _validarCampos();
+                        setState(() {
+                          _controllerCampos.email = _controllerEmail.text;
+                          _controllerCampos.senha = _controllerSenha.text;
+                          _controllerCampos.validarCamposTexto(context);
+                        });
                       },
                       child: Container(
                         height: 50,

@@ -3,7 +3,7 @@ import 'package:projeto_cbq/Home/PageAluno.dart';
 
 import 'Home/pageAdmin.dart';
 import 'Telas/cadastro.dart';
-import 'Telas/login.dart';
+import 'views/login.dart';
 
 class Rotas {
   static const String ROTA_CADASTRO = "/cadastro";

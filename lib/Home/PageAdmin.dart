@@ -10,7 +10,7 @@ import 'package:path_provider/path_provider.dart';
 
 import 'package:projeto_cbq/Home/turma.dart';
 import 'package:projeto_cbq/Rotas.dart';
-import 'package:projeto_cbq/Telas/login.dart';
+import 'package:projeto_cbq/views/login.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 

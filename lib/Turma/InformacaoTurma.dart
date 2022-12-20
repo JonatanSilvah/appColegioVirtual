@@ -146,12 +146,18 @@ class _InfoTurmaState extends State<InfoTurma> {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
               case ConnectionState.waiting:
-                return Center(
-                  child: Column(
-                    children: [
-                      Text("Carregando Alunos"),
-                      CircularProgressIndicator()
-                    ],
+                return Container(
+                  color: Color(0xff344955),
+                  child: Center(
+                    child: Column(
+                      children: [
+                        Text(
+                          "Carregando informações da turma",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        CircularProgressIndicator()
+                      ],
+                    ),
                   ),
                 );
                 break;

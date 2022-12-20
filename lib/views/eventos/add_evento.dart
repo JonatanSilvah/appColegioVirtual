@@ -2,10 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
-import 'package:projeto_cbq/views/eventos/home_eventos.dart';
-import 'package:projeto_cbq/views/custom/input_custom.dart';
 import 'package:projeto_cbq/models/modelEvento.dart';
-import 'package:projeto_cbq/models/modelTurma.dart';
+import 'package:projeto_cbq/views/custom/input_custom.dart';
 
 class CriarEvento extends StatefulWidget {
   const CriarEvento({super.key});

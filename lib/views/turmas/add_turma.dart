@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:projeto_cbq/views/custom/input_custom.dart';
 import 'package:projeto_cbq/models/modelTurma.dart';
+import 'package:projeto_cbq/views/custom/input_custom.dart';
+
 
 class AdicionarTurma extends StatefulWidget {
   const AdicionarTurma({super.key});

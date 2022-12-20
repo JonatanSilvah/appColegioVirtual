@@ -5,12 +5,9 @@ import 'package:get/get.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 import 'package:cpf_cnpj_validator/cpf_validator.dart';
-
-import 'package:projeto_cbq/Rotas.dart';
+import 'package:projeto_cbq/models/user.dart';
 import 'package:projeto_cbq/views/Home/page_aluno.dart';
 import 'package:projeto_cbq/views/custom/input_custom.dart';
-import 'package:projeto_cbq/models/user.dart';
-
 
 
 class Cadastro extends StatefulWidget {

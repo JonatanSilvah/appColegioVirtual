@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_cbq/views/Home/page_aluno.dart';
-
 import 'package:projeto_cbq/views/login_cadastro/cadastro.dart';
 import 'package:projeto_cbq/views/login_cadastro/login.dart';
-
 import 'views/Home/page_admin.dart';
 
 

@@ -1,10 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:projeto_cbq/Rotas.dart';
-
-import 'package:projeto_cbq/views/Home/page_aluno.dart';
-
 import 'package:projeto_cbq/views/alunos/page_aluno.dart';
 import 'package:projeto_cbq/views/config/config.dart';
 import 'package:projeto_cbq/views/eventos/home_eventos.dart';
@@ -12,7 +8,6 @@ import 'package:projeto_cbq/views/login_cadastro/login.dart';
 import 'package:projeto_cbq/views/turmas/home_turma.dart';
 import 'dart:async';
 
-import 'package:projeto_cbq/views/turmas/home_turma.dart';
 
 class PageAdmin extends StatefulWidget {
   const PageAdmin({super.key});
@@ -138,7 +133,7 @@ Future<void> selectedItem(BuildContext context, int index) async {
   switch (index) {
     case 0:
       Navigator.of(context)
-          .push(MaterialPageRoute(builder: (_) => pageAluno()));
+          .push(MaterialPageRoute(builder: (_) => homeAluno()));
       break;
     case 1:
       Navigator.of(context).push(MaterialPageRoute(builder: (_) => Turma()));

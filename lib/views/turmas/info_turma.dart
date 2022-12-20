@@ -1,18 +1,13 @@
 import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-
-
 import 'package:projeto_cbq/models/modelEvento.dart';
 import 'package:projeto_cbq/models/user.dart';
 import 'package:projeto_cbq/views/alunos/info_aluno.dart';
 import 'package:projeto_cbq/views/turmas/add_aluno_turma.dart';
 
-import 'package:projeto_cbq/views/alunos/info_aluno.dart';
+
 
 class InfoTurma extends StatefulWidget {
   String? idTurma;

@@ -1,12 +1,6 @@
 import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
-
-
-import 'package:projeto_cbq/views/alunos/info_aluno.dart';
 import 'package:projeto_cbq/views/eventos/add_evento.dart';
 import 'package:projeto_cbq/views/eventos/info_evento.dart';
 

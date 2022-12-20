@@ -1,17 +1,21 @@
 import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:projeto_cbq/models/user.dart';
 import 'package:projeto_cbq/views/alunos/info_aluno.dart';
 
-class pageAluno extends StatefulWidget {
+
+class homeAluno extends StatefulWidget {
+  const homeAluno({super.key});
+
   @override
-  State<pageAluno> createState() => _pageAlunoState();
+  State<homeAluno> createState() => _homeAlunoState();
 }
 
-class _pageAlunoState extends State<pageAluno> {
-  final _controller = StreamController<QuerySnapshot>.broadcast();
+class _homeAlunoState extends State<homeAluno> {
+  @override
+  Widget build(BuildContext context) {
+     final _controller = StreamController<QuerySnapshot>.broadcast();
   FirebaseFirestore db = FirebaseFirestore.instance;
   String _nomePesquisa = "";
   _adicionarListenerAlunos() async {
@@ -39,8 +43,7 @@ class _pageAlunoState extends State<pageAluno> {
     super.dispose();
   }
 
-  @override
-  Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(

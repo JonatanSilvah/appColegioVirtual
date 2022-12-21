@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:projeto_cbq/views/login_cadastro/login.dart';
 
-
 class SplashScream extends StatefulWidget {
   const SplashScream({super.key});
 
@@ -26,18 +25,8 @@ class _SplashScreamState extends State<SplashScream> {
       body: Container(
           height: 250,
           width: 250,
-          color: Color(0xfff9aa33),
           padding: EdgeInsets.all(60),
-          child: Column(
-            children: [
-              Center(
-                child: Text(
-                  "LOGO",
-                  style: TextStyle(color: Colors.black),
-                ),
-              )
-            ],
-          )),
+          child: Image.asset("images/logoSchool.png")),
     );
   }
 }

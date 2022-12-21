@@ -4,9 +4,6 @@ import 'package:projeto_cbq/views/custom/input_custom.dart';
 import 'package:projeto_cbq/controllers/verificar_usuario_logado.dart';
 import 'package:projeto_cbq/controllers/validar_login.dart';
 
-
-
-
 class Login extends StatefulWidget {
   const Login({super.key});
 
@@ -38,14 +35,14 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
             children: [
               Container(
                   height: 350,
-                  width: 250,
-                  /*  decoration: BoxDecoration(
-                     image: DecorationImage(
-                      image: AssetImage(
-                        "images/logoCBQ.png",
-                      ),
-                      fit: BoxFit.contain),
-                    ),*/
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage(
+                          "images/logoSchool.png.png",
+                        ),
+                        fit: BoxFit.contain),
+                  ),
                   color: Color(0xfff9aa33),
                   child: Center(
                     child: Text(

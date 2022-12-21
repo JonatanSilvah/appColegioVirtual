@@ -1,9 +1,9 @@
-import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:projeto_cbq/controllers/stream_controller.dart';
 import 'package:projeto_cbq/models/user.dart';
 import 'package:projeto_cbq/views/alunos/info_aluno.dart';
-
 
 class homeAluno extends StatefulWidget {
   const homeAluno({super.key});
@@ -13,37 +13,23 @@ class homeAluno extends StatefulWidget {
 }
 
 class _homeAlunoState extends State<homeAluno> {
-  @override
-  Widget build(BuildContext context) {
-     final _controller = StreamController<QuerySnapshot>.broadcast();
-  FirebaseFirestore db = FirebaseFirestore.instance;
+  final streamController _controller = streamController();
   String _nomePesquisa = "";
-  _adicionarListenerAlunos() async {
-    final stream = FirebaseFirestore.instance
-        .collection("usuarios")
-        .doc("tipoUsuario")
-        .collection("alunos")
-        .snapshots();
-
-    stream.listen((event) {
-      _controller.add(event);
-    });
-  }
 
   @override
   void initState() {
-    _adicionarListenerAlunos();
-
+    _controller.adicionarListenerAlunos();
     super.initState();
   }
 
   @override
   void dispose() {
-    _controller.close();
+    _controller.controllerAlunos.close();
     super.dispose();
   }
 
-
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -73,7 +59,7 @@ class _homeAlunoState extends State<homeAluno> {
         ),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: _controller.stream,
+        stream: _controller.controllerAlunos.stream,
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:

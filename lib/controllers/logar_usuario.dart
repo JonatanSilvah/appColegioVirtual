@@ -21,12 +21,20 @@ class logarUsuario {
         .then((value) async {
       _idUsuario = value.user!.uid;
 
-      final snapshot = await db.collection("usuarios").doc(_idUsuario).get();
+      final snapshot = await db
+          .collection("usuarios")
+          .doc("tipoUsuario")
+          .collection("alunos")
+          .doc(_idUsuario)
+          .get();
+      final snapshotGestor =
+          await db.collection("usuarios").doc(_idUsuario).get();
 
       final dados = snapshot.data();
 
-      _tipoUsuario = dados!["tipo"];
-      if (_tipoUsuario == "aluno") {
+      final dadosGestor = snapshotGestor.data();
+
+      if (dados != null) {
         Navigator.pushNamedAndRemoveUntil(
             context, "/page-aluno", (route) => false);
       } else {

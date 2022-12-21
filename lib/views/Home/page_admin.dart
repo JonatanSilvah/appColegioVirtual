@@ -8,7 +8,6 @@ import 'package:projeto_cbq/views/login_cadastro/login.dart';
 import 'package:projeto_cbq/views/turmas/home_turma.dart';
 import 'dart:async';
 
-
 class PageAdmin extends StatefulWidget {
   const PageAdmin({super.key});
 
@@ -25,19 +24,33 @@ class _PageAdminState extends State<PageAdmin> {
 
   _verificarUsuarioLogado() async {
     User? usuarioAtual = await auth.currentUser;
+    setState(() {
+      _idUsuario = usuarioAtual!.uid;
+    });
 
     if (usuarioAtual != null) {
-      setState(() {
-        _idUsuario = usuarioAtual.uid;
-      });
-      final snapshot = await db.collection("usuarios").doc(_idUsuario).get();
+      final snapshot = await db
+          .collection("usuarios")
+          .doc("tipoUsuario")
+          .collection("alunos")
+          .doc(_idUsuario)
+          .get();
+      final snapshotGestor =
+          await db.collection("usuarios").doc(_idUsuario).get();
 
       final dados = snapshot.data();
-
-      setState(() {
-        _nomeUsuario = dados!["nome"];
-        _emailUsuario = dados["email"];
-      });
+      final dadosGestor = snapshotGestor.data();
+      if (dados != null) {
+        setState(() {
+          _nomeUsuario = dados["nome"];
+          _emailUsuario = dados["email"];
+        });
+      } else {
+        setState(() {
+          _nomeUsuario = dadosGestor!["nome"];
+          _emailUsuario = dadosGestor["email"];
+        });
+      }
     } else if (usuarioAtual == null) {}
   }
 

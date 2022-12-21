@@ -52,7 +52,7 @@ android {
         targetSdkVersion 28
         multiDexEnabled true
         versionCode flutterVersionCode.toInteger()
-        versionName flutterVersionName
+        versionName "1.0"
     }
 
     buildTypes {

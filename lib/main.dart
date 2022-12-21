@@ -15,7 +15,7 @@ Future<void> main(List<String> args) async {
 
   runApp(MaterialApp(
     theme: temaPadrao,
-    title: "Colégio brasileiro de quiropraxia e terapias manuais",
+    
     initialRoute: "/",
     onGenerateRoute: Rotas.gerarRotas,
     debugShowCheckedModeBanner: false,

@@ -1,20 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:projeto_cbq/models/modelTurma.dart';
 import 'package:projeto_cbq/models/user.dart';
-import 'package:projeto_cbq/views/turmas/info_turma.dart';
 
-class infoAluno extends StatefulWidget {
+class minhasInformacoes extends StatefulWidget {
   Usuario usuario;
-  infoAluno(this.usuario);
+  minhasInformacoes(this.usuario);
 
   @override
-  State<infoAluno> createState() => _infoAlunoState();
+  State<minhasInformacoes> createState() => _minhasInformacoesState();
 }
 
-class _infoAlunoState extends State<infoAluno> {
+class _minhasInformacoesState extends State<minhasInformacoes> {
   FirebaseFirestore db = FirebaseFirestore.instance;
 
   List<Usuario> usuarios = [];
@@ -61,7 +59,7 @@ class _infoAlunoState extends State<infoAluno> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xff0b222c),
-        title: Text("Informações do aluno"),
+        title: Text("Minhas informações"),
       ),
       body: Container(
         color: Color(0xff344955),
@@ -229,7 +227,7 @@ class _infoAlunoState extends State<infoAluno> {
               color: Colors.white,
             ),
             Text(
-              "Turmas cadastradas",
+              "Minhas turmas",
               style: TextStyle(
                   fontWeight: FontWeight.normal,
                   fontSize: 18,
@@ -249,17 +247,7 @@ class _infoAlunoState extends State<infoAluno> {
                       turma.idTumra = _turmasSalvas[index].idTurma;
 
                       return ListTile(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) => InfoTurma(
-                                      turma.idTurma,
-                                      turma.nome,
-                                      turma.anoTurma,
-                                      turma.cidade,
-                                      turma.cidade)));
-                        },
+                        onTap: () {},
                         title: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [

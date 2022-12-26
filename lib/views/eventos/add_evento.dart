@@ -16,6 +16,7 @@ class _CriarEventoState extends State<CriarEvento> {
   FirebaseFirestore db = FirebaseFirestore.instance;
   List<DropdownMenuItem<String>> dropOpcoes = [];
   List<DropdownMenuItem<String>> dropOpcoesTurma = [];
+  String? _idEventoNovo;
 
   var _controllerNome = TextEditingController();
   var _controllerDescricao = TextEditingController();
@@ -136,12 +137,19 @@ class _CriarEventoState extends State<CriarEvento> {
   }
 
   _cadatrarEvento(BuildContext context, ModelEvento evento) async {
-    await db.collection("eventos").add(evento.toMap());
+    await db.collection("eventos").add(evento.toMap()).then((value) {
+      setState(() {
+        _idEventoNovo = value.id;
+        print(_idEventoNovo);
+      });
+    }).onError((error, stackTrace) => null);
+
     await db
         .collection("turmas")
         .doc(evento.turmaEvento)
         .collection("eventos")
-        .add(evento.toMap());
+        .doc(_idEventoNovo)
+        .set(evento.toMap());
 
     Navigator.pop(context);
   }

@@ -40,7 +40,6 @@ dependencies:
   firebase_auth: ^4.2.0
   cloud_firestore: ^4.2.0
   firebase_storage: ^11.0.6
-  image_picker: ^0.8.6
   gap: ^2.0.1
   intl: ^0.17.0
   cpf_cnpj_validator: ^2.0.0
@@ -48,6 +47,8 @@ dependencies:
   pdf: ^3.8.2
   path_provider: ^2.0.5
   share_extend: "^2.0.0"
+  http: ^0.13.5
+  
 
 
 

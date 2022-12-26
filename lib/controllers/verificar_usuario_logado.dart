@@ -13,7 +13,7 @@ class verificarUsuarioLogado {
     FirebaseFirestore db = FirebaseFirestore.instance;
     User? usuarioAtual = await auth.currentUser;
 
-    if (usuarioAtual != null) {
+    if (usuarioAtual != null && usuarioAtual.emailVerified == true) {
       _idUsuario = usuarioAtual.uid;
       final snapshot = await db
           .collection("usuarios")

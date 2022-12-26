@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:projeto_cbq/models/modelTurma.dart';
 import 'package:projeto_cbq/models/user.dart';
+import 'package:projeto_cbq/views/turmas/page_turma_aluno.dart';
 
 class minhasInformacoes extends StatefulWidget {
   Usuario usuario;
@@ -247,7 +248,9 @@ class _minhasInformacoesState extends State<minhasInformacoes> {
                       turma.idTumra = _turmasSalvas[index].idTurma;
 
                       return ListTile(
-                        onTap: () {},
+                        onTap: () {
+                         
+                        },
                         title: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -259,8 +262,7 @@ class _minhasInformacoesState extends State<minhasInformacoes> {
                                   color: Color(0xfff9aa33)),
                             ),
                             Gap(5),
-                            Icon(Icons.arrow_right_rounded,
-                                color: Color(0xfff9aa33))
+                           
                           ],
                         ),
                       );

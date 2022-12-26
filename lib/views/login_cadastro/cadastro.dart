@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +10,7 @@ import 'package:cpf_cnpj_validator/cpf_validator.dart';
 import 'package:projeto_cbq/models/user.dart';
 import 'package:projeto_cbq/views/Home/page_aluno.dart';
 import 'package:projeto_cbq/views/custom/input_custom.dart';
-
+import 'package:projeto_cbq/views/login_cadastro/verify_email_page.dart';
 
 class Cadastro extends StatefulWidget {
   const Cadastro({super.key});
@@ -43,7 +45,7 @@ class _CadastroState extends State<Cadastro> {
   DateTime date =
       DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
 
-  _validarCampos() {
+  _validarCampos() async {
     var outputFormat = DateFormat('dd/MM/yyyy');
     var outputDate = outputFormat.format(date);
     String nome = _controllerNome.text.trim();
@@ -63,7 +65,7 @@ class _CadastroState extends State<Cadastro> {
         _mensagemErro = "Por favor preencha o nome";
         _errorBorderNome = true;
       });
-    } else if (dataNasc == dataNow) {
+    } /*else if (dataNasc == dataNow) {
       setState(() {
         _errorBorderDataNasc = true;
         _errorBorderNome = false;
@@ -82,7 +84,8 @@ class _CadastroState extends State<Cadastro> {
         _errorBorderSenha = false;
         _errorBorderCelular = false;
       });
-    } else if (email.isEmpty) {
+    }*/
+    else if (email.isEmpty) {
       setState(() {
         _mensagemErro = "Preencha o email";
         _errorBorderEmail = true;
@@ -102,7 +105,7 @@ class _CadastroState extends State<Cadastro> {
         _errorBorderSenha = false;
         _errorBorderCelular = false;
       });
-    } else if (celular.isEmpty) {
+    } /*else if (celular.isEmpty) {
       setState(() {
         _mensagemErro = "Preencha o telefone celular";
         _errorBorderCelular = true;
@@ -112,7 +115,8 @@ class _CadastroState extends State<Cadastro> {
         _errorBorderCPF = false;
         _errorBorderDataNasc = false;
       });
-    } else if (senha.isEmpty && senha.length < 6) {
+    } */
+    else if (senha.isEmpty && senha.length < 6) {
       setState(() {
         _mensagemErro = "Preenche a senha e utilize mais de 6 caracteres";
         _errorBorderSenha = true;
@@ -141,17 +145,17 @@ class _CadastroState extends State<Cadastro> {
         _errorBorderDataNasc = false;
         _errorBorderCPF = false;
         _errorBorderCelular = false;
+        _controllerNome.text = "";
+        _controllerEmail.text = "";
+        _controllerSenha.text = "";
+        _controllerConfSenha.text = "";
       });
       Usuario usuario = Usuario();
       usuario.nome = nome;
       usuario.senha = senha;
       usuario.email = email;
-      usuario.dataNasc = dataNasc;
-      usuario.cpfUsuario = cpf;
-      usuario.celularUsuario = celular;
-      usuario.cidadeUsuario = cidade!;
 
-      _cadastrarUsuario(usuario);
+      await _cadastrarUsuario(usuario);
     }
   }
 
@@ -159,18 +163,19 @@ class _CadastroState extends State<Cadastro> {
     await auth
         .createUserWithEmailAndPassword(
             email: usuario.email, password: usuario.senha)
-        .then((value) {
+        .then((value) async {
       usuario.idUsuario = value.user!.uid;
-
-      db
+      await db
           .collection("usuarios")
           .doc("tipoUsuario")
           .collection("alunos")
           .doc(usuario.idUsuario)
           .set(usuario.toMap());
-
-      Navigator.pushAndRemoveUntil(context,
-          MaterialPageRoute(builder: (_) => PageAluno()), (route) => false);
+      print(usuario.nome);
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (_) => verifyEmailPage()),
+          (route) => false);
     }).catchError((error) {});
   }
 
@@ -201,8 +206,9 @@ class _CadastroState extends State<Cadastro> {
           backgroundColor: Color(0xff0b222c),
         ),
         body: Container(
+          height: MediaQuery.of(context).size.height,
           color: Color(0xff344955),
-          padding: EdgeInsets.all(16),
+          padding: EdgeInsets.only(top: 16, left: 16, right: 16),
           child: SingleChildScrollView(
               child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -221,7 +227,7 @@ class _CadastroState extends State<Cadastro> {
                     : TextStyle(color: Colors.white),
               ),
               Gap(10),
-              Row(
+              /*  Row(
                 children: [
                   Text(
                     "Data de nascimento: ",
@@ -304,18 +310,21 @@ class _CadastroState extends State<Cadastro> {
                   });
                 }),
               ),
-              Gap(10),
+              Gap(10),*/
               InputCustomizado(
                 hint: "E-mail",
                 controller: _controllerEmail,
-                type: TextInputType.number,
+                type: TextInputType.emailAddress,
                 mensagem: _errorBorderEmail ? _mensagemErro : null,
-                icon: null,
+                icon: Icon(
+                  Icons.email,
+                  color: Colors.white,
+                ),
                 style: _errorBorderEmail
                     ? TextStyle(color: Colors.red)
                     : TextStyle(color: Colors.white),
               ),
-              Gap(10),
+              /*  Gap(10),
               InputCustomizado(
                 hint: "Celular",
                 controller: _controllerCelular,
@@ -325,25 +334,33 @@ class _CadastroState extends State<Cadastro> {
                 style: _errorBorderCelular
                     ? TextStyle(color: Colors.red)
                     : TextStyle(color: Colors.white),
-              ),
+              ),*/
               Gap(10),
               InputCustomizado(
                 hint: "Senha",
                 controller: _controllerSenha,
-                type: TextInputType.number,
+                type: TextInputType.text,
                 mensagem: _errorBorderSenha ? _mensagemErro : null,
-                icon: null,
+                obscure: true,
+                icon: Icon(
+                  Icons.lock,
+                  color: Colors.white,
+                ),
                 style: _errorBorderSenha
                     ? TextStyle(color: Colors.red)
                     : TextStyle(color: Colors.white),
               ),
               Gap(10),
               InputCustomizado(
-                hint: "Senha",
+                hint: "Confirmar senha",
                 controller: _controllerConfSenha,
-                type: TextInputType.number,
+                obscure: true,
+                type: TextInputType.text,
                 mensagem: _errorBorderSenha ? _mensagemErro : null,
-                icon: null,
+                icon: Icon(
+                  Icons.lock,
+                  color: Colors.white,
+                ),
                 style: _errorBorderSenha
                     ? TextStyle(color: Colors.red)
                     : TextStyle(color: Colors.white),
@@ -369,6 +386,7 @@ class _CadastroState extends State<Cadastro> {
                           colors: [Color(0xffe3bb64), Color(0xfff9aa33)])),
                 ),
               ),
+              Gap(25)
             ],
           )),
         ));

@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:projeto_cbq/models/modelEvento.dart';
 import 'package:projeto_cbq/views/eventos/add_evento.dart';
 import 'package:projeto_cbq/views/eventos/info_evento.dart';
+import 'package:projeto_cbq/views/eventos/info_evento_gestor.dart';
 
 class Eventos extends StatefulWidget {
   const Eventos({super.key});
@@ -65,13 +67,27 @@ class _EventosState extends State<Eventos> {
                 );
               case ConnectionState.active:
               case ConnectionState.done:
+                QuerySnapshot? querySnapshot = snapshot.data;
+                List<DocumentSnapshot> eventos = querySnapshot!.docs.toList();
                 return Container(
                   color: Color(0xff344955),
                   child: ListView.builder(
-                      itemCount: snapshot.data!.docs.length,
+                      itemCount: eventos.length,
                       itemBuilder: (context, index) {
                         var data = snapshot.data!.docs[index].data()
                             as Map<String, dynamic>;
+                        DocumentSnapshot item = eventos[index];
+
+                        ModelEvento evento = ModelEvento();
+                        evento.nomeEvento = data["nome"];
+                        evento.cidadeEvento = data["cidade"];
+                        evento.dataInicial = data["dataInicial"];
+                        evento.dataFinal = data["dataFinal"];
+                        evento.descricao = data["descricao"];
+                        evento.status = data["status"];
+                        String idEvento = item.id;
+                        evento.turmaEvento = data["turma"];
+
                         return Card(
                           color: Color(0xff5f7481),
                           child: ListTile(
@@ -79,7 +95,8 @@ class _EventosState extends State<Eventos> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (_) => InfoEvento()));
+                                      builder: (_) =>
+                                          infoEventoGestor(evento, idEvento)));
                             },
                             title: Text(data["nome"],
                                 style: TextStyle(

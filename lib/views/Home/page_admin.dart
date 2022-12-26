@@ -56,7 +56,7 @@ class _PageAdminState extends State<PageAdmin> {
 
   @override
   void initState() {
-    _verificarUsuarioLogado();
+   _verificarUsuarioLogado();
 
     super.initState();
   }

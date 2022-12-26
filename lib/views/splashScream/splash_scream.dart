@@ -26,7 +26,9 @@ class _SplashScreamState extends State<SplashScream> {
           height: 250,
           width: 250,
           padding: EdgeInsets.all(60),
-          child: Image.asset("images/logoSchool.png")),
+          child: Column(
+            children: [Center(child: Image.asset("images/logoSchool.png"))],
+          )),
     );
   }
 }

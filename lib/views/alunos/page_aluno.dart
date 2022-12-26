@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:projeto_cbq/controllers/stream_controller.dart';
@@ -96,10 +95,10 @@ class _homeAlunoState extends State<homeAluno> {
 
                         Usuario usuario = Usuario();
                         usuario.nome = data["nome"];
-                        usuario.celularUsuario = data["celular"];
+                        /*  usuario.celularUsuario = data["celular"];
                         usuario.cidadeUsuario = data["cidade"];
                         usuario.cpfUsuario = data["cpf"];
-                        usuario.dataNasc = data["dataNasc"];
+                        usuario.dataNasc = data["dataNasc"];*/
                         usuario.email = data["email"];
                         usuario.idUsuario = data["idUsuario"];
 

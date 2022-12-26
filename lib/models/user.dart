@@ -2,27 +2,28 @@ class Usuario {
   String? _nome;
   String? _email;
   String? _senha;
-  String? _dataNasc;
+  String _dataNasc = "";
   String? _idUsuario;
-  String? _cpfUsuario;
-  String? _celularUsuario;
-  String? _cidadeUsuario;
+  String _cpfUsuario = "";
+  String _celularUsuario = "";
+  String _cidadeUsuario = "";
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {
       "nome": this.nome,
       "email": this.email,
       "idUsuario": this.idUsuario,
-      "dataNasc": this.dataNasc,
+        "dataNasc": this.dataNasc,
       "cpf": this.cpfUsuario,
       "celular": this.celularUsuario,
       "cidade": this.cidadeUsuario,
-      "tipoUsuario": "aluno"
+      "tipoUsuario": "aluno",
+      "cadastroCompleto": "nao"
     };
     return map;
   }
 
-  String get cidadeUsuario => _cidadeUsuario!;
+   String get cidadeUsuario => _cidadeUsuario!;
   set cidadeUsuario(String value) {
     _cidadeUsuario = value;
   }

@@ -7,8 +7,6 @@ import 'package:projeto_cbq/models/user.dart';
 import 'package:projeto_cbq/views/alunos/info_aluno.dart';
 import 'package:projeto_cbq/views/turmas/add_aluno_turma.dart';
 
-
-
 class InfoTurma extends StatefulWidget {
   String? idTurma;
   String? nomeTurma;
@@ -351,7 +349,7 @@ class _InfoTurmaState extends State<InfoTurma> {
 
                                   Usuario usuario = Usuario();
                                   usuario.nome = data["nome"];
-                                  usuario.celularUsuario = data["celular"];
+                                     usuario.celularUsuario = data["celular"];
                                   usuario.cidadeUsuario = data["cidade"];
                                   usuario.cpfUsuario = data["cpf"];
                                   usuario.dataNasc = data["dataNasc"];

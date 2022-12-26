@@ -157,7 +157,7 @@ class _AddAlunoState extends State<AddAluno> {
 
                     Usuario usuario = Usuario();
                     usuario.nome = data["nome"];
-                    usuario.celularUsuario = data["celular"];
+                usuario.celularUsuario = data["celular"];
                     usuario.cidadeUsuario = data["cidade"];
                     usuario.cpfUsuario = data["cpf"];
                     usuario.dataNasc = data["dataNasc"];

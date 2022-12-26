@@ -1,10 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:projeto_cbq/models/user.dart';
 import 'package:projeto_cbq/views/alunos/info_aluno.dart';
 import 'package:projeto_cbq/views/alunos/minhas_informacoes.dart';
+import 'package:projeto_cbq/views/eventos/home_eventos_alunos.dart';
 import 'package:projeto_cbq/views/login_cadastro/login.dart';
+import 'package:projeto_cbq/views/turmas/page_turma_aluno.dart';
 
 class PageAluno extends StatefulWidget {
   const PageAluno({super.key});
@@ -19,6 +22,7 @@ class _PageAlunoState extends State<PageAluno> {
   String? _idUsuario;
   String? _nomeUsuario;
   String? _emailUsuario;
+  String? _cadastroCompleto;
 
   Usuario usuario = Usuario();
 
@@ -54,6 +58,7 @@ class _PageAlunoState extends State<PageAluno> {
       setState(() {
         _nomeUsuario = dados!["nome"];
         _emailUsuario = dados["email"];
+        _cadastroCompleto = dados["cadastroCompleto"];
       });
     } else {
       Navigator.pushAndRemoveUntil(context,
@@ -80,7 +85,32 @@ class _PageAlunoState extends State<PageAluno> {
         centerTitle: true,
       ),
       body: Container(
+        padding: EdgeInsets.all(16),
         color: Color(0xff344955),
+        child: Column(
+          children: [
+            _cadastroCompleto == "nao"
+                ? Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: TextButton(
+                        onPressed: () {},
+                        child: Row(
+                          children: [
+                            Text(
+                              "Seu cadastro não esta completo\nClique aqui para completar",
+                              style: TextStyle(
+                                  color: Color(0xfff9aa33),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16),
+                            ),
+                            Expanded(child: Container()),
+                            Icon(Icons.arrow_right_rounded,
+                                color: Color(0xfff9aa33))
+                          ],
+                        )))
+                : Container()
+          ],
+        ),
       ),
     );
   }
@@ -159,8 +189,12 @@ Future<void> selectedItem(
           .push(MaterialPageRoute(builder: (_) => minhasInformacoes(usuario)));
       break;
     case 1:
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (_) => turmasAluno()));
       break;
     case 2:
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (_) => eventosAlunos()));
       break;
     case 3:
       break;

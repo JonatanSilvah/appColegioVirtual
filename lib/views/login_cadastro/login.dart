@@ -1,8 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 import 'package:projeto_cbq/views/custom/input_custom.dart';
 import 'package:projeto_cbq/controllers/verificar_usuario_logado.dart';
 import 'package:projeto_cbq/controllers/validar_login.dart';
+import 'package:projeto_cbq/views/login_cadastro/recuperar_senha.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -18,38 +21,35 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
   var _controllerEmail = TextEditingController();
   var _controllerSenha = TextEditingController();
 
+  
+
   @override
   void initState() {
+    
     _controlerUsuarioLogado.verificaUsuarioLogado(context);
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: Container(
         color: Color(0xff344955),
         child: SingleChildScrollView(
           child: Column(
             children: [
               Container(
-                  height: 350,
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage(
-                          "images/logoSchool.png.png",
-                        ),
-                        fit: BoxFit.contain),
-                  ),
-                  color: Color(0xfff9aa33),
-                  child: Center(
-                    child: Text(
-                      "LOGO",
-                      style: TextStyle(color: Colors.black),
-                    ),
-                  )),
+                height: 350,
+                width: MediaQuery.of(context).size.width * 0.9,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage(
+                        "images/logoSchool.png",
+                      ),
+                      fit: BoxFit.contain),
+                ),
+              ),
               Padding(
                 padding: EdgeInsets.only(left: 30, right: 30),
                 child: Column(
@@ -148,11 +148,17 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                       ),
                     ),
                     Gap(12),
-                    Text(
-                      "Esqueci minha senha",
-                      style: TextStyle(
-                          color: Color(0xfff9aa33),
-                          fontWeight: FontWeight.bold),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (_) => recuperarSenha()));
+                      },
+                      child: Text(
+                        "Esqueci minha senha",
+                        style: TextStyle(
+                            color: Color(0xfff9aa33),
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
                     Gap(25)
                   ],

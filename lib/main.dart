@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projeto_cbq/views/login_cadastro/login.dart';
 import 'package:projeto_cbq/views/splashScream/splash_scream.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -15,10 +16,9 @@ Future<void> main(List<String> args) async {
 
   runApp(MaterialApp(
     theme: temaPadrao,
-    
     initialRoute: "/",
     onGenerateRoute: Rotas.gerarRotas,
     debugShowCheckedModeBanner: false,
-    home: SplashScream(),
+    home: Login(),
   ));
 }

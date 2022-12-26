@@ -136,7 +136,7 @@ class _infoAlunoState extends State<infoAluno> {
                   ),
                   Gap(5),
                   Text(
-                    widget.usuario.dataNasc.toString(),
+                   widget.usuario.dataNasc.toString(),
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
